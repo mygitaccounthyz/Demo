@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/db.properties" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/WEB-INF/lib" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/WEB-INF/lib/json/jackson-annotations-2.2.1.jar" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/WEB-INF/lib/json/jackson-core-2.2.1.jar" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/WEB-INF/lib/json/jackson-core-asl-1.8.8.jar" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/WEB-INF/lib/json/jackson-databind-2.2.1.jar" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/WEB-INF/lib/json/jackson-mapper-asl-1.8.8.jar" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/WEB-INF/lib/json/jackson-module-jaxb-annotations-2.2.1.jar" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/WEB-INF/lib/up/commons-fileupload-1.3.1.jar" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/WEB-INF/lib/up/commons-io-2.2.jar" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/WEB-INF/page/user/showorders.jsp" charset="GBK" />
+  </component>
+</project>
