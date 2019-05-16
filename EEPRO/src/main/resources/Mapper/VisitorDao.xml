@@ -4,4 +4,41 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ssm_springbootx.dao.VisitorDao">
 
+    <insert id="addVisitor">
+        insert into T_VISITOR (VI_ID, VI_NAME, VI_PASS) VALUES (SEQ_VI.nextval,#{viName},#{viPass})
+    </insert>
+
+    <update id="updateVisitor">
+        UPDATE T_VISITOR
+        <set>
+            <if test="viName!=null">
+                VI_NAME=#{viName},
+            </if>
+            <if test="viPass!=null">
+                VI_PASS=#{viPass},
+            </if>
+        </set>
+        WHERE VI_ID=#{viId}
+    </update>
+
+    <delete id="deleteVisitor">
+        DELETE FROM T_VISITOR WHERE VI_ID=#{viId}
+    </delete>
+
+    <select id="getVisitor" resultMap="non-orm.VISITOR">
+        SELECT * FROM T_VISITOR
+        <where>
+        <if test="viId!=0">
+        VI_ID=#{viId}
+        </if>
+        <if test="viName!=null">
+        AND VI_NAME=#{viName}
+        </if>
+        <if test="viPass!=null">
+        AND VI_PASS=#{viPass}
+        </if>
+        </where>
+    </select>
+
+
 </mapper>

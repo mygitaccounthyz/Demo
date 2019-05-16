@@ -24,7 +24,7 @@
 </head>
 <body>
     <div id="banner">
-
+        <a href="/transfer?target=login">登录</a>
     </div>
     <div id="container">
         <p>招聘信息</p>

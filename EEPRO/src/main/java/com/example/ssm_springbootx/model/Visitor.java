@@ -17,6 +17,30 @@ public class Visitor extends User {
         this.viPass = viPass;
     }
 
+    public int getViId() {
+        return viId;
+    }
+
+    public void setViId(int viId) {
+        this.viId = viId;
+    }
+
+    public String getViName() {
+        return viName;
+    }
+
+    public void setViName(String viName) {
+        this.viName = viName;
+    }
+
+    public String getViPass() {
+        return viPass;
+    }
+
+    public void setViPass(String viPass) {
+        this.viPass = viPass;
+    }
+
     @Override
     public int getId() {
         return viId;
@@ -42,6 +66,12 @@ public class Visitor extends User {
         this.viPass = viPass;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Visitor{" +
+                "viId=" + viId +
+                ", viName='" + viName + '\'' +
+                ", viPass='" + viPass + '\'' +
+                '}';
+    }
 }

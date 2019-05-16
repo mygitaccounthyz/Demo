@@ -2,6 +2,112 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Common">
+<mapper namespace="non-orm">
+
+    <resultMap id="APPLICATION" type="com.example.ssm_springbootx.model.Application">
+        <id property="apId" column="AP_ID"/>
+        <result property="apRcId" column="AP_RCID"/>
+        <result property="apViId" column="AP_VIID"/>
+        <result property="apState" column="AP_STATE"/>
+        <result property="apTime" column="AP_TIME"/>
+    </resultMap>
+    
+    <resultMap id="ATTENDANCE" type="com.example.ssm_springbootx.model.Attendance">
+        <id property="atId" column="AT_ID"/>
+        <result property="atEEId" column="AT_EEID"/>
+        <result property="atOff" column="AT_OFF"/>
+        <result property="atOn" column="AT_ON"/>
+        <result property="atOffTime" column="AT_OFFTIME"/>
+        <result property="atOnTime" column="AT_ONTIME"/>
+    </resultMap>
+    
+    <resultMap id="BASIC" type="com.example.ssm_springbootx.model.Basic">
+        <id property="bsId" column="BS_ID"/>
+        <result property="bsName" column="BS_NAME"/>
+        <result property="bsPhone" column="BS_PHONE"/>
+        <result property="bsAddress" column="BS_ADDRESS"/>
+        <result property="bsGender" column="BS_GENDER"/>
+        <result property="bsBirth" column="BS_BIRTH"/>
+        <result property="bsEmail" column="BS_EMAIL"/>
+        <result property="bsEEId" column="BS_NAME"/>
+        <result property="bsViId" column="BS_VIID"/>
+    </resultMap>
+    
+    <resultMap id="DEAL" type="com.example.ssm_springbootx.model.Deal">
+        <id property="dlId" column="DL_ID"/>
+        <result property="dlReason" column="DL_REASON"/>
+        <result property="dlAtId" column="DL_ATID"/>
+        <result property="dlMoney" column="DL_MONEY"/>
+        <result property="dlEEId" column="DL_EEID"/>
+        <result property="dlTime" column="DL_TIME"/>
+    </resultMap>
+    
+    <resultMap id="DEPARTMENT" type="com.example.ssm_springbootx.model.Department">
+        <id property="dpId" column="DP_ID"/>
+        <result property="dpFunction" column="DP_FUNCTION"/>
+        <result property="dpName" column="DP_NAME"/>
+    </resultMap>
+    
+    <resultMap id="EMPLOYEE" type="com.example.ssm_springbootx.model.Employee">
+        <id property="eeId" column="EE_ID"/>
+        <result property="eeName" column="EE_NAME"/>
+        <result property="eePass" column="EE_PASS"/>
+        <result property="eeState" column="EE_STATE"/>
+        <result property="eeViId" column="EE_VIID"/>
+        <result property="eeJId" column="EE_JID"/>
+        <result property="eeBsId" column="EE_BSID"/>
+    </resultMap>
+    
+    <resultMap id="JOB" type="com.example.ssm_springbootx.model.Job">
+        <id property="jId" column="J_ID"/>
+        <result property="jName" column="J_NAME"/>
+        <result property="jDpId" column="J_DPID"/>
+        <result property="jState" column="J_STATE"/>
+        <result property="jDescription" column="J_DESCRIPTION"/>
+    </resultMap>
+    
+    <resultMap id="RECRUITMENT" type="com.example.ssm_springbootx.model.Recruitment">
+        <id property="rcId" column="RC_ID"/>
+        <result property="rcJId" column="RC_JID"/>
+        <result property="rcDescription" column="RC_DESCRIPTION"/>
+        <result property="rcState" column="RC_STATE"/>
+    </resultMap>
+    
+    <resultMap id="RESUME" type="com.example.ssm_springbootx.model.Resume">
+        <id property="rsId" column="RS_ID"/>
+        <result property="rsAward" column="RS_AWARD"/>
+        <result property="rsEducation" column="RS_EDUCATION"/>
+        <result property="rsMajor" column="RS_MAJOR"/>
+        <result property="rsExperience" column="RS_EXPERIENCE"/>
+        <result property="rsViId" column="RS_VIID"/>
+        <result property="rsEEId" column="RS_EEID"/>
+        <result property="rsSkills" column="RS_SKILLS"/>
+        <result property="rsIntroduction" column="RS_INTRODUCTION"/>
+    </resultMap>
+    
+    <resultMap id="SALARY" type="com.example.ssm_springbootx.model.Salary">
+        <id property="slId" column="SL_ID"/>
+        <result property="slEEId" column="SL_EEID"/>
+        <result property="slDlMoney" column="SL_DLMONEY"/>
+        <result property="slDate" column="SL_DATE"/>
+        <result property="slState" column="SL_STATE"/>
+        <result property="slPayment" column="SL_PAYMENT"/>
+    </resultMap>
+    
+
+    <resultMap id="TRAINING" type="com.example.ssm_springbootx.model.Training">
+        <id property="trId" column="TR_ID"/>
+        <result property="trTitle" column="TR_TITLE"/>
+        <result property="trDescription" column="TR_DESCRIPTION"/>
+        <result property="trTime" column="TR_TIME"/>
+        <result property="trAddress" column="TR_ADDRESS"/>
+    </resultMap>
+
+
+    <resultMap id="VISITOR" type="com.example.ssm_springbootx.model.Visitor">
+        <id property="viId" column="VI_ID"/>
+        <result property="viName" column="VI_NAME"/>
+        <result property="viPass" column="VI_PASS"/>
+    </resultMap>
 
 </mapper>
