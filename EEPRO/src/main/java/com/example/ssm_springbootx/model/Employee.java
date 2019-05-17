@@ -87,23 +87,21 @@ public class Employee extends User{
         return eeId;
     }
     @Override
-    public void setId(int eeId) {
-        this.eeId = eeId;
-    }
-    @Override
     public String getName() {
         return eeName;
-    }
-    @Override
-    public void setName(String eeName) {
-        this.eeName = eeName;
     }
     @Override
     public String getPass() {
         return eePass;
     }
+
     @Override
-    public void setPass(String eePass) {
-        this.eePass = eePass;
+    public String toString() {
+        return "Employee{" +
+                "eeId=" + eeId +
+                ", eeName='" + eeName + '\'' +
+                ", eePass='" + eePass + '\'' +
+                ", eeState='" + eeState + '\'' +
+                '}';
     }
 }

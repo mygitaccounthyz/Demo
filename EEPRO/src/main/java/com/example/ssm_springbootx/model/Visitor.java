@@ -1,9 +1,31 @@
 package com.example.ssm_springbootx.model;
 
+import java.util.List;
+
 public class Visitor extends User {
+
     private int viId;
     private String viName;
     private String viPass;
+
+    private Basic basic;
+    private Resume resume;
+
+    public Basic getBasic() {
+        return basic;
+    }
+
+    public void setBasic(Basic basic) {
+        this.basic = basic;
+    }
+
+    public Resume getResume() {
+        return resume;
+    }
+
+    public void setResume(Resume resume) {
+        this.resume = resume;
+    }
 
     public Visitor() {
     }
@@ -46,24 +68,12 @@ public class Visitor extends User {
         return viId;
     }
     @Override
-    public void setId(int viid) {
-        this.viId = viid;
-    }
-    @Override
     public String getName() {
         return viName;
     }
     @Override
-    public void setName(String viName) {
-        this.viName = viName;
-    }
-    @Override
     public String getPass() {
         return viPass;
-    }
-    @Override
-    public void setPass(String viPass) {
-        this.viPass = viPass;
     }
 
     @Override

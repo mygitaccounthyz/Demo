@@ -1,4 +1,7 @@
-<%@ page import="com.example.ssm_springbootx.model.User" %><%--
+<%@ page import="com.example.ssm_springbootx.model.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.ssm_springbootx.model.Recruitment" %>
+<%@ page import="com.example.ssm_springbootx.model.Job" %><%--
   Created by IntelliJ IDEA.
   User: HYZ
   Date: 2019/5/15
@@ -10,29 +13,59 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
             + request.getServerPort() + path + "/";
-
+    User user = (User) session.getAttribute("user");
+    List<Recruitment> recruitments = (List<Recruitment>) session.getAttribute("recruitments");
 
 %>
 <html>
 <head>
     <base href="<%=basePath%>"/>
     <title>Title</title>
-    <script src="/static/js/jquery-3.1.0.js"></script>
+    <script src="js/jquery-3.1.0.js"></script>
     <script>
 
     </script>
 </head>
 <body>
-    <div id="banner">
-        <a href="/transfer?target=login">登录</a>
-    </div>
-    <div id="container">
-        <p>招聘信息</p>
-<%
-%>
+    <div id="wrapper" style="background: url('img/home_bg.jpg')" >
+        <div id="banner" style="background: url('img/banner_bg.jpg')">
+            <%
+                if (user==null){
+            %>
+            <a href="transfer?target=login">登录</a>
+            <a href="transfer?target=register">注册</a>
+            <%
+            }else {
+            %>
+            <a href="user.do"></a>
+            <%
+                }
+            %>
+        </div>
+        <div id="container">
+            <p>招聘信息</p>
 
-<%
-%>
+            <%--<% for (Recruitment recruitment : recruitments) {--%>
+            <%--Job job=recruitment.getRcJId();--%>
+            <%--%>  <table>--%>
+            <%--<tr>--%>
+            <%--<th>职位名称</th>--%>
+            <%--<th>工作部门</th>--%>
+            <%--<th>主要工作</th>--%>
+            <%--<th>更新时间</th>--%>
+            <%--</tr>--%>
+            <%--<tr>--%>
+            <%--<td><a href="recruitment.do?rcId=<%=recruitment.getRcId()%>"><%=job.getjName()%></a></td>--%>
+            <%--<td><%=job.getjDpId()%></td>--%>
+            <%--<td><%=job.getjDescription()%></td>--%>
+            <%--<td><%=recruitment.getRcDate()%></td>--%>
+            <%--</tr>--%>
+            <%--<%--%>
+            <%--}--%>
+            <%--%>  </table>--%>
+
+        </div>
     </div>
+
 </body>
 </html>

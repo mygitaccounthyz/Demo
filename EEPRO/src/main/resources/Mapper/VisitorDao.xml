@@ -25,8 +25,10 @@
         DELETE FROM T_VISITOR WHERE VI_ID=#{viId}
     </delete>
 
-    <select id="getVisitor" resultMap="non-orm.VISITOR">
+    <select id="getVisitor" resultMap="visitor">
         SELECT * FROM T_VISITOR
+        left outer join T_BASIC on BS_VIID=VI_ID
+        left outer join T_RESUME on RS_VIID=VI_ID
         <where>
         <if test="viId!=0">
         VI_ID=#{viId}
@@ -40,5 +42,9 @@
         </where>
     </select>
 
+    <resultMap id="visitor" type="com.example.ssm_springbootx.model.Visitor" extends="non-orm.VISITOR">
+        <association property="basic" resultMap="non-orm.BASIC" />
+        <association property="resume" resultMap="non-orm.RESUME"/>
+    </resultMap>
 
 </mapper>
