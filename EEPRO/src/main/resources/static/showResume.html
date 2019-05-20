@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border='1' style="border-collapse: collapse">
+    <tr>
+        <td colspan='4' align='center'>
+            <span>个人简历</span>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+                            <span>
+                                姓名：
+                                ${sessionScope.user.viResume.rsBasic.bsName}
+                            </span>
+        </td>
+
+        <td>
+            <sapn>
+                性别：
+                ${sessionScope.user.viResume.rsBasic.bsGender}
+            </sapn>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+                            <span>
+                                出生日期：
+                                ${sessionScope.user.viResume.rsBasic.bsBirth}
+                            </span>
+        </td>
+        <td>
+                            <span>
+                                电话：
+                                ${sessionScope.user.viResume.rsBasic.bsPhone}
+                            </span>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="4">
+                            <span>
+                                Email：
+                                ${sessionScope.user.viResume.rsBasic.bsEmail}
+                            </span>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="4">
+                            <span>
+                                联系地址：
+                                ${sessionScope.user.viResume.rsBasic.bsAddress}
+                            </span>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+                            <span>
+                                学历：
+                                ${sessionScope.user.viResume.rsEducation}
+                            </span>
+        </td>
+        <td>
+                            <span>
+                                专业：
+                                ${sessionScope.user.viResume.rsMajor}
+                            </span>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="4">
+                            <span>
+                                掌握技能：<br>
+                                ${sessionScope.user.viResume.rsSkills}
+                            </span>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="4">
+                            <span>
+                                荣誉证书：<br>
+                                ${sessionScope.user.viResume.rsAward}
+                            </span>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan='4'>
+                            <span>
+                                工作经历：
+                                ${sessionScope.user.viResume.rsExperience}
+                            </span>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan='4'>
+                            <span>
+                                自我介绍:
+                                <br>
+                                ${sessionScope.user.viResume.rsIntroduction}
+                            </span>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

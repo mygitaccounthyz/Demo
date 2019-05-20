@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.ssm_springbootx.dao.JobDao">
+
+    <insert id="addJob">
+        insert into T_JOB (J_ID, J_NAME, J_DPID, J_DESCRIPTION, J_STATE)
+        values (SEQ_JOB.nextval,#{jName},#{jDpId.dpId},#{jDescription},#{jState})
+    </insert>
+
+    <update id="updateJob">
+        update T_JOB
+        set J_NAME=#{jName}, J_DESCRIPTION=#{jDescription}, J_STATE=#{jState}
+        where J_ID=#{jId}
+    </update>
+
+    <delete id="deleteJob">
+        delete from T_JOB where J_ID=#{jId}
+    </delete>
+
+    <!--ADMIN-->
+    <select id="getJob" resultMap="job">
+        select * from T_JOB
+
+        left outer join T_DEPARTMENT on J_DPID=DP_ID
+
+        LEFT OUTER JOIN T_EMPLOYEE ON EE_JID=J_ID
+        LEFT OUTER JOIN T_BASIC ON EE_ID=BS_EEID
+
+        LEFT OUTER JOIN T_EEINFORMATION ON EI_EEID=EE_ID
+        LEFT OUTER JOIN T_SALARY ON SL_EIID = EI_ID
+        LEFT OUTER JOIN T_DEAL ON DL_EIID =EI_ID
+        LEFT OUTER JOIN T_ATTENDANCE ON AT_EIID =EI_ID
+        LEFT OUTER JOIN T_TRMID ON MID_EIID = EI_ID
+        LEFT OUTER JOIN T_TRAINING ON MID_TRID = TR_ID
+
+        where J_ID=#{jId}
+    </select>
+
+    <select id="getJobs" resultMap="job">
+        select * from T_JOB
+        left outer join T_DEPARTMENT on J_DPID=DP_ID
+
+        LEFT OUTER JOIN T_EMPLOYEE ON EE_JID=J_ID
+        LEFT OUTER JOIN T_BASIC ON EE_ID=BS_EEID
+
+        LEFT OUTER JOIN T_EEINFORMATION ON EI_EEID=EE_ID
+        LEFT OUTER JOIN T_SALARY ON SL_EIID = EI_ID
+        LEFT OUTER JOIN T_DEAL ON DL_EIID =EI_ID
+        LEFT OUTER JOIN T_ATTENDANCE ON AT_EIID =EI_ID
+        LEFT OUTER JOIN T_TRMID ON MID_EIID = EI_ID
+        LEFT OUTER JOIN T_TRAINING ON MID_TRID = TR_ID
+        <where>
+            <if test="jDpId!=null and jDpId.dpId!=0">
+                J_DPID=#{jDpId.dpId}
+            </if>
+            <!--<if test="jDpId!=null and jDpId.dpName!=null">-->
+                <!--DP_NAME=#{jDpId.dpName}-->
+            <!--</if>-->
+        </where>
+
+    </select>
+
+    <resultMap id="JOB" type="com.example.ssm_springbootx.model.Job" extends="non-orm.JOB">
+        <association property="jDpId" resultMap="non-orm.DEPARTMENT"/>
+    </resultMap>
+
+    <resultMap id="job" type="com.example.ssm_springbootx.model.Job" extends="JOB">
+        <collection property="jEmployees" resultMap="com.example.ssm_springbootx.dao.EmployeeDao.employee"/>
+    </resultMap>
+
+</mapper>

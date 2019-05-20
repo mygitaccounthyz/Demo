@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.ssm_springbootx.dao.EEInformationDao">
+
+    <insert id="addEEInformation">
+        insert into T_EEINFORMATION (EI_ID, EI_EEID, EI_ACCOUNT, EI_IDCARD)
+        VALUES (SEQ_EI.nextval,#{eiEeId},#{eiAccount},#{eiIDCard})
+    </insert>
+
+    <update id="updateEEInformation">
+        UPDATE T_EEINFORMATION SET EI_ACCOUNT=#{eiAccount},EI_IDCARD=#{eiIDCard}
+        WHERE EI_ID=#{eiId}
+    </update>
+
+    <delete id="deleteEEInformation">
+        DELETE FROM T_EEINFORMATION WHERE EI_ID=#{eiId}
+    </delete>
+
+    <select id="getEEInformation" resultMap="eeInformation">
+        SELECT * FROM T_EEINFORMATION
+
+        LEFT OUTER JOIN T_SALARY ON SL_EIID = EI_ID
+        LEFT OUTER JOIN T_DEAL ON DL_EIID =EI_ID
+        LEFT OUTER JOIN T_ATTENDANCE ON AT_EIID =EI_ID
+        LEFT OUTER JOIN T_TRMID ON MID_EIID = EI_ID
+        LEFT OUTER JOIN T_TRAINING ON MID_TRID = TR_ID
+
+        WHERE EI_ID=#{eiId}
+    </select>
+
+    <select id="getEEInformations" resultMap="eeInformation">
+        SELECT * FROM T_EEINFORMATION
+
+        LEFT OUTER JOIN T_SALARY ON SL_EIID = EI_ID
+        LEFT OUTER JOIN T_DEAL ON DL_EIID =EI_ID
+        LEFT OUTER JOIN T_ATTENDANCE ON AT_EIID =EI_ID
+        LEFT OUTER JOIN T_TRMID ON MID_EIID = EI_ID
+        LEFT OUTER JOIN T_TRAINING ON MID_TRID = TR_ID
+
+
+    </select>
+
+
+    <resultMap id="eeInformation" type="com.example.ssm_springbootx.model.EEInformation"
+               extends="non-orm.EEINFORMATION">
+        <!---->
+        <collection property="eiTrainings" resultMap="non-orm.TRAINING"/>
+        <collection property="eiAttendances" resultMap="non-orm.ATTENDANCE"/>
+        <collection property="eiDeals" resultMap="non-orm.DEAL"/>
+        <collection property="eiSalaries" resultMap="non-orm.SALARY"/>
+    </resultMap>
+</mapper>

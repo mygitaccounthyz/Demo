@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.ssm_springbootx.dao.ResumeDao">
+
+    <insert id="addResume">
+        <selectKey keyProperty="rsId" order="BEFORE" resultType="int">
+            select  SEQ_RS.nextval FROM DUAL
+        </selectKey>
+        insert into T_RESUME (RS_ID, RS_EDUCATION, RS_MAJOR, RS_EXPERIENCE, RS_VIID,
+         RS_SKILLS, RS_AWARD, RS_INTRODUCTION)
+        values (#{rsId},#{rsEducation},#{rsMajor},#{rsExperience},#{rsViId},
+        #{rsSkills},#{rsAward},#{rsIntroduction})
+    </insert>
+
+    <update id="updateResume">
+        update T_RESUME
+        set RS_EDUCATION=#{rsEducation}, RS_MAJOR=#{rsMajor}, RS_EXPERIENCE=#{rsExperience},
+         RS_SKILLS=#{rsSkills}, RS_AWARD=#{rsAward}, RS_INTRODUCTION=#{rsIntroduction}
+        where RS_ID=#{rsId}
+    </update>
+
+    <delete id="deleteResume">
+        delete from T_RESUME where RS_ID=#{rsId}
+    </delete>
+
+    <select id="getResume" resultMap="resume">
+        select * from T_RESUME
+        left outer join T_BASIC on BS_RSID=RS_ID
+        <where>
+            <if test="rsId!=null">
+                RS_ID=#{rsId}
+            </if>
+            <if test="rsViId!=null">
+                and RS_VIID=#{rsViId}
+            </if>
+        </where>
+    </select>
+
+    <resultMap id="resume" type="com.example.ssm_springbootx.model.Resume" extends="non-orm.RESUME">
+        <association property="rsBasic" resultMap="non-orm.BASIC"/>
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset=UTF-8>
+    <title>Title</title>
+</head>
+<body>
+<form action='resume.do' method='post'>
+    <table border='1'; style="border-collapse: collapse">
+        <tr>
+            <td colspan='4' align='center'>个人简历</td>
+        </tr>
+
+        <tr>
+            <td>姓名:</td>
+            <td>
+                <input type='text' maxlength='8'  name='r_name' required style='border: 0px' >
+            </td>
+            <td>性别:</td>
+            <td>
+            <input type='radio' name='r_sex' value='男' required>男<input type='radio' name='r_sex' value='女' required>女
+            </td>
+        </tr>
+
+        <tr>
+            <td>出生日期：</td>
+            <td><input required style='border: 0px' type='date' name='r_birthday' required></td>
+            <td>民族：</td>
+            <td><input required style='border: 0px' type='text' name='r_nation' maxlength='8'  required></td>
+        </tr>
+
+        <tr>
+            <td>籍贯：</td>
+            <td><input required style='border: 0px' type='text' maxlength='8'  name='r_nativeplace' required></td>
+            <td>毕业院校：</td>
+            <td><input required style='border: 0px' type='text' name='r_graduteschool' maxlength='20'  required></td>
+        </tr>
+
+        <tr>
+            <td>政治面貌：</td>
+            <td><input required style='border: 0px' type='text' name='r_politics' maxlength='10'  required></td>
+            <td>专业:</td>
+            <td><input required style='border: 0px' type='text' name='r_major' maxlength='20'  required></td>
+        </tr>
+
+        <tr>
+            <td>学历：</td>
+            <td><input required style='border: 0px' type='text' name='r_education' maxlength='10'  required></td>
+            <td>邮政编码：</td>
+            <td><input required style='border: 0px' type='text' maxlength='6'  name='r_zipcode' required></td>
+        </tr>
+
+        <tr>
+            <td>电话号码：</td>
+            <td><input required style='border: 0px' type='text' maxlength='11'  name='r_phone' required></td>
+            <td>E-MAIL</td>
+            <td><input required style='border: 0px' type='text' name='r_email'  required></td>
+        </tr>
+
+        <tr>
+            <td>现住址：</td>
+            <td colspan='3'><input required style='border: 0px' required type='text' maxlength='50'  name='r_address'></td>
+        </tr>
+
+        <tr>
+            <td colspan='4'>
+                <label>自我介绍: <br>
+                <textarea name='r_evaluation' maxlength='225'  style="width: 98%;height: 240px;resize: none"></textarea>
+                </label>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan='4' align='center' >
+                <input type='submit' value='提交'>
+            </td>
+        </tr>
+
+    </table>
+</form>
+</body>
+</html>

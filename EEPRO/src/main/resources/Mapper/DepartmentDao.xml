@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.ssm_springbootx.dao.DepartmentDao">
+
+    <insert id="addDepartment">
+        insert into T_DEPARTMENT (DP_ID, DP_NAME, DP_FUNCTION)
+        values (SEQ_DP.nextval,#{dpName},#{dpFunction})
+    </insert>
+
+    <update id="updateDepartment">
+        update T_DEPARTMENT
+        set  DP_NAME=#{dpName}, DP_FUNCTION=#{dpFunction}
+        where DP_ID=#{dpId}
+    </update>
+
+    <delete id="deleteDepartment">
+        delete from T_DEPARTMENT where DP_ID=#{dpId}
+    </delete>
+
+    <!--ADMIN-->
+    <select id="getDepartment" resultMap="department">
+        select * from T_DEPARTMENT
+
+        LEFT OUTER JOIN T_JOB ON J_DPID=DP_ID
+        LEFT OUTER JOIN T_EMPLOYEE ON EE_JID=J_ID
+        LEFT OUTER JOIN T_BASIC ON EE_ID=BS_EEID
+
+        LEFT OUTER JOIN T_EEINFORMATION ON EI_EEID=EE_ID
+        LEFT OUTER JOIN T_SALARY ON SL_EIID = EI_ID
+        LEFT OUTER JOIN T_DEAL ON DL_EIID =EI_ID
+        LEFT OUTER JOIN T_ATTENDANCE ON AT_EIID =EI_ID
+        LEFT OUTER JOIN T_TRMID ON MID_EIID = EI_ID
+        LEFT OUTER JOIN T_TRAINING ON MID_TRID = TR_ID
+        <where>
+            <if test="dpId!=null">
+                DP_ID=#{dpId}
+            </if>
+            <if test="dpName!=null">
+               AND DP_NAME=#{dpName}
+            </if>
+        </where>
+    </select>
+
+    <select id="getDepartments" resultMap="department">
+        select * from T_DEPARTMENT
+
+        LEFT OUTER JOIN T_JOB ON J_DPID=DP_ID
+        LEFT OUTER JOIN T_EMPLOYEE ON EE_JID=J_ID
+        LEFT OUTER JOIN T_BASIC ON EE_ID=BS_EEID
+
+        LEFT OUTER JOIN T_EEINFORMATION ON EI_EEID=EE_ID
+        LEFT OUTER JOIN T_SALARY ON SL_EIID = EI_ID
+        LEFT OUTER JOIN T_DEAL ON DL_EIID =EI_ID
+        LEFT OUTER JOIN T_ATTENDANCE ON AT_EIID =EI_ID
+        LEFT OUTER JOIN T_TRMID ON MID_EIID = EI_ID
+        LEFT OUTER JOIN T_TRAINING ON MID_TRID = TR_ID
+    </select>
+
+    <resultMap id="department" type="com.example.ssm_springbootx.model.Department" extends="non-orm.DEPARTMENT">
+        <collection property="dpJobs" resultMap="com.example.ssm_springbootx.dao.JobDao.job"/>
+    </resultMap>
+
+</mapper>

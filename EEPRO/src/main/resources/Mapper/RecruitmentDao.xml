@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.ssm_springbootx.dao.RecruitmentDao">
+
+    <insert id="addRecruitment">
+        insert into T_RECRUITMENT (RC_ID, RC_DESCRIPTION, RC_STATE,RC_DATE)
+        VALUES (SEQ_RC.nextval,#{rcDescription},#{rcState},#{rcDate})
+    </insert>
+
+    <update id="updateRecruitment">
+        update T_RECRUITMENT
+        set   RC_DESCRIPTION=#{rcDescription}, RC_STATE=#{rcState}
+        where RC_ID=#{rcId}
+    </update>
+
+    <delete id="deleteRecruitment">
+        delete from T_RECRUITMENT where RC_ID=#{rcId}
+    </delete>
+
+
+    <select id="getRecruitment" resultMap="recruitment">
+        select * from T_RECRUITMENT
+
+        left outer join T_JOB on RC_ID=J_RCID
+        LEFT OUTER JOIN T_DEPARTMENT ON J_DPID=DP_ID
+
+        LEFT OUTER JOIN T_APPLICATION ON AP_RCID=RC_ID
+        LEFT OUTER JOIN T_VISITOR ON AP_VIID=VI_ID
+        LEFT OUTER JOIN T_RESUME ON RS_VIID=VI_ID
+        LEFT OUTER JOIN T_BASIC ON BS_RSID=RS_ID
+
+        where RC_ID=#{rcId}
+    </select>
+
+    <!--ADMIN-->
+    <select id="getRecruitments" resultMap="recruitment">
+        select * from T_RECRUITMENT
+
+        left outer join T_JOB on RC_ID=J_RCID
+        LEFT OUTER JOIN T_DEPARTMENT ON J_DPID=DP_ID
+
+        LEFT OUTER JOIN T_APPLICATION ON AP_RCID=RC_ID
+        LEFT OUTER JOIN T_VISITOR ON AP_VIID=VI_ID
+        LEFT OUTER JOIN T_RESUME ON RS_VIID=VI_ID
+        LEFT OUTER JOIN T_BASIC ON BS_RSID=RS_ID
+        <where>
+            <if test="rcJId!=null and rcJId.jId!=0">
+                RC_JID=#{rcJId.jId}
+            </if>
+            <if test="rcState!=null">
+               AND RC_STATE=#{rcState}
+            </if>
+        </where>
+    </select>
+
+    <resultMap id="RECRUITMENT" type="com.example.ssm_springbootx.model.Recruitment" extends="non-orm.RECRUITMENT">
+        <collection property="rcJId" resultMap="com.example.ssm_springbootx.dao.JobDao.JOB"/>
+    </resultMap>
+    
+    <resultMap id="recruitment" type="com.example.ssm_springbootx.model.Recruitment" extends="RECRUITMENT">
+        <collection property="rcApplications" resultMap="com.example.ssm_springbootx.dao.ApplicationDao.application"/>
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table border='1' style="border-collapse: collapse">
+    <tr>
+        <td colspan='4' align='center'>
+            个人简历
+            <input type="hidden" name="rsViId"  value="${sessionScope.user.viId}">
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label>
+                姓名：
+                <input type='text' maxlength='8'  name='bsName' required style='border: 0'>
+            </label>
+        </td>
+
+        <td>
+            <label>
+                性别：
+                <input type='radio' name='bsGender' value='男' required>男
+                <input type='radio' name='bsGender' value='女' required>女
+            </label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label>
+                出生日期：
+                <input required style='border: 0' type='date' name='bsBirth' >
+            </label>
+        </td>
+        <td>
+            <label>
+                电话：
+                <input required style='border: 0' type='text' maxlength='11'  name='bsPhone' >
+            </label>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="4">
+            <label>
+                Email：
+                <input required style='border: 0; display: inline-block; width: 80%' type='text' name='bsEmail'  >
+            </label>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="4">
+            <label>
+                联系地址：
+                <input required style= 'border: 0; display: inline-block; width: 80%'  type='text' maxlength='50'  name='bsAddress' >
+            </label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label>
+                学历：
+                <input required style='border: 0' type='text' name='rsEducation' maxlength='10'  >
+            </label>
+        </td>
+        <td>
+            <label>
+                专业：
+                <input required style='border: 0' type='text' maxlength='6'  name='rsMajor' >
+            </label>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="4">
+            <label>
+                掌握技能：<br>
+                <textarea name="rsSkills" style="width: 98%;resize: none"></textarea>
+            </label>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="4">
+            <label>
+                荣誉证书：<br>
+                <textarea name="rsAward" style="width: 98%;resize: none"></textarea>
+            </label>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan='4'>
+            <label>
+                工作经历：
+                <textarea name="rsExperience" maxlength='225' style="width: 98%;height: 120px;resize: none"></textarea>
+            </label>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan='4'>
+            <label>
+                自我介绍:
+                <br>
+                <textarea name='rsIntroduction' maxlength='225'  style="width: 98%;height: 120px;resize: none"></textarea>
+            </label>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan='4' align='center' >
+            <input type='submit' value='提交'>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

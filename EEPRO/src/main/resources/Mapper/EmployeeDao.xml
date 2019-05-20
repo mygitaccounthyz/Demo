@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.ssm_springbootx.dao.EmployeeDao">
+
+    <insert id="addEmployee">
+        <selectKey keyProperty="eeJId" order="BEFORE" resultType="int">
+            select SEQ_EE.nextval from dual
+        </selectKey>
+        insert into T_EMPLOYEE (EE_ID, EE_JID, EE_VIID, EE_STATE, EE_NAME, EE_PASS)
+        values (#{eeId},#{eeJId.jId},#{eeViId},#{eeState},#{eeName},#{eePass})
+    </insert>
+
+    <update id="updateEmployee">
+        update T_EMPLOYEE
+        <set>
+            <if test="eeState!=null">
+                EE_STATE=#{eeState},
+            </if>
+            <if test="eeName!=null">
+                EE_NAME=#{eeName},
+            </if>
+            <if test="eePass!=null">
+                EE_PASS=#{eePass}
+            </if>
+        </set>
+        where EE_ID=#{eeId}
+    </update>
+
+    <delete id="deleteEmployee">
+        delete from T_EMPLOYEE where EE_ID=#{eeId}
+    </delete>
+
+    <select id="getEmployee" resultMap="employee">
+        select * from T_EMPLOYEE
+
+        LEFT OUTER JOIN T_JOB ON EE_JID=J_ID
+        left outer join T_DEPARTMENT on J_DPID=DP_ID
+
+        LEFT OUTER JOIN T_BASIC ON EE_ID=BS_EEID
+
+        LEFT OUTER JOIN T_EEINFORMATION ON EI_EEID=EE_ID
+        LEFT OUTER JOIN T_SALARY ON SL_EIID = EI_ID
+        LEFT OUTER JOIN T_DEAL ON DL_EIID =EI_ID
+        LEFT OUTER JOIN T_ATTENDANCE ON AT_EIID =EI_ID
+        LEFT OUTER JOIN T_TRMID ON MID_EIID = EI_ID
+        LEFT OUTER JOIN T_TRAINING ON MID_TRID = TR_ID
+
+        <where>
+            <if test="eeId!=0">
+                EE_ID=#{eeId}
+            </if>
+            <if test="eeName!=null">
+                EE_NAME=#{eeName}
+            </if>
+            <if test="eePass!=null">
+                EE_PASS=#{eePass}
+            </if>
+        </where>
+    </select>
+
+    <select id="getEmployees" resultMap="employee">
+        select * from T_EMPLOYEE
+
+        LEFT OUTER JOIN T_JOB ON EE_JID=J_ID
+        left outer join T_DEPARTMENT on J_DPID=DP_ID
+
+        LEFT OUTER JOIN T_BASIC ON EE_ID=BS_EEID
+
+        LEFT OUTER JOIN T_EEINFORMATION ON EI_EEID=EE_ID
+        LEFT OUTER JOIN T_SALARY ON SL_EIID = EI_ID
+        LEFT OUTER JOIN T_DEAL ON DL_EIID =EI_ID
+        LEFT OUTER JOIN T_ATTENDANCE ON AT_EIID =EI_ID
+        LEFT OUTER JOIN T_TRMID ON MID_EIID = EI_ID
+        LEFT OUTER JOIN T_TRAINING ON MID_TRID = TR_ID
+
+        <where>
+            <if test="eeJId!=null eeJId.jId!=0">
+                EE_JID=#{eeJId.jId}
+            </if>
+            <if test="eeState!=null">
+               and EE_STATE=#{eeState}
+            </if>
+        </where>
+    </select>
+
+    <resultMap id="EMPLOYEE" type="com.example.ssm_springbootx.model.Employee" extends="non-orm.EMPLOYEE">
+        <association property="eeBsId" resultMap="non-orm.BASIC"/>
+        <association property="eeJId" resultMap="com.example.ssm_springbootx.dao.JobDao.JOB"/>
+    </resultMap>
+    
+    <resultMap id="employee" type="com.example.ssm_springbootx.model.Employee" extends="EMPLOYEE">
+        <association property="eeInformation" resultMap="com.example.ssm_springbootx.dao.EEInformationDao.eeInformation"/>
+    </resultMap>
+    
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.ssm_springbootx.dao.BasicDao">
+
+    <insert id="addBasic">
+        insert into T_BASIC (BS_NAME, BS_ID, BS_PHONE, BS_ADDRESS, BS_GENDER,
+         BS_BIRTH, BS_EMAIL,  BS_RSID)
+        values (#{bsName},SEQ_BS.nextval,#{bsPhone},#{bsAddress},#{bsGender},
+        #{bsBirth},#{bsEmail},#{bsRsId})
+    </insert>
+
+    <update id="updateBasic">
+        update T_BASIC
+        <set>
+            BS_NAME=#{bsName},BS_PHONE=#{bsPhone},BS_ADDRESS=#{bsAddress},
+            BS_GENDER=#{bsGender}, BS_BIRTH=#{bsBirth}, BS_EMAIL=#{bsEmail}
+            <if test="bsEEId!=0">
+                BS_EEID=#{bsEEId}
+            </if>
+        </set>
+         where BS_ID=#{bsId}
+    </update>
+
+    <delete id="deleteBasic">
+        delete from T_BASIC where BS_ID=#{bsId}
+    </delete>
+
+    <select id="getBasic" resultMap="non-orm.BASIC">
+        select * from T_BASIC where BS_ID=#{bsId};
+    </select>
+
+    <!--<select id="getBasics" resultMap="non-orm.BASIC">-->
+        <!--select * from T_BASIC-->
+    <!--</select>-->
+
+</mapper>

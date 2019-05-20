@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.example.ssm_springbootx.dao.ApplicationDao">
+
+    <insert id="addApplication">
+        insert into T_APPLICATION (AP_ID, AP_RCID, AP_VIID, AP_STATE,AP_DATE)
+        values (SEQ_AP.nextval,#{apRcId.rcId},#{apViId.viId},#{apState},#{apDate})
+    </insert>
+
+    <update id="updateApplication">
+        update T_APPLICATION
+        <set>
+            <if test="apTime!=null">
+                AP_TIME=#{apTime},
+            </if>
+            <if test="apState!=null">
+                AP_STATE=#{apState},
+            </if>
+        </set>
+        where AP_ID=#{apId}
+    </update>
+
+    <delete id="deleteApplication">
+        delete from T_APPLICATION where AP_ID=#{apId}
+    </delete>
+
+    <select id="getApplication" resultMap="application">
+        select * from T_APPLICATION
+
+        left outer join T_RECRUITMENT on AP_RCID=RC_ID
+        left outer join T_JOB on J_RCID=RC_ID
+        left outer join T_DEPARTMENT on J_DPID=DP_ID
+
+        left outer join T_VISITOR on AP_VIID=VI_ID
+        left outer join T_RESUME on RS_VIID=VI_ID
+        left outer join T_BASIC on BS_RSID=RS_ID
+
+        where AP_ID=#{apId};
+    </select>
+
+    <select id="getApplications" resultMap="application">
+        select * from T_APPLICATION
+
+        left outer join T_RECRUITMENT on AP_RCID=RC_ID
+        left outer join T_JOB on RC_JID=J_ID
+        left outer join T_DEPARTMENT on J_DPID=DP_ID
+
+        left outer join T_VISITOR on AP_VIID=VI_ID
+        left outer join T_RESUME on RS_VIID=VI_ID
+        left outer join T_BASIC on BS_RSID=RS_ID
+        <where>
+
+            <if test="apRcId!=null and apRcId.rcId!=0">
+                AP_RCID=#{apRcId.rcId}
+            </if>
+            <if test="apState!=null">
+                AP_STATE=#{apState}
+            </if>
+        </where>
+    </select>
+
+    <resultMap id="application" type="com.example.ssm_springbootx.model.Application" extends="non-orm.APPLICATION">
+        <association property="apRcId" resultMap="com.example.ssm_springbootx.dao.RecruitmentDao.RECRUITMENT"/>
+        <association property="apViId" resultMap="com.example.ssm_springbootx.dao.VisitorDao.VISITOR"/>
+    </resultMap>
+
+</mapper>
