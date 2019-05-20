@@ -107,6 +107,11 @@
                                 <input required style='border: 0' type='text' name='rsEducation' maxlength='10'
                                        value="${sessionScope.user.viResume.rsEducation}">
                             </label>
+                            <label>
+                                毕业院校：
+                                <input required style='border: 0' type='text' name='rsGraduation' maxlength='10'
+                                       value="${sessionScope.user.viResume.rsGraduation}">
+                            </label>
                         </td>
                         <td>
                             <label>

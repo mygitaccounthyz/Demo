@@ -22,75 +22,99 @@
     <title>admin</title>
     <script src="js/jquery-3.1.0.js"></script>
     <script>
+        function spreadjob(button) {
+            var $button = $(button);
+        }
+        function spreadee(button) {
+            var $button = $(button);
+        }
 
     </script>
 </head>
 <body>
 <div id="wrapper">
     <div id="banner">
-        
+        <a href="quit.do">退出  </a>
+        <a href="transfer?target=index">首页  </a>
     </div>
     <div id="container">
-        <div id="apps">
-                <c:forEach items="${sessionScope.apps}" var="application" >
-                    <ul style="list-style-type: none" class="recruitment">
-                        <li><input class="rcId" type="hidden" name="rcId" value="${application.apRcId.rcId}"></li>
-                        <li>招聘信息</li>
-                        <li>更新时间：${application.apRcId.rcDate}</li>
-                        <li>工作部门：${application.apRcId.rcJId.jDpId.dpName}</li>
-                        <li>主要职责：${application.apRcId.rcJId.jDescription}</li>
-                        <li>职位要求：${application.apRcId.rcDescription}</li>
-                    </ul>
-                    <ul style="list-style-type: none" class="app">
-                        <li>申请信息</li>
-                        <li class="out">投递日期：<c:out value="${application.apDate}"/></li>
-                        <li class="appstate">申请状态：<c:out value="${application.apState}"/></li>
+        <div id="recruitments">
+            <c:forEach items="${requestScope.recruitments}" var="recruitment">
+                <ul>
+                <c:forEach items="${recruitment.rcApplications}" var="app">
+                    <c:choose>
 
-                        <c:choose>
-                            <c:when test="${application.apState=='已读'}">
-                                <li>
-                                    <form action="interview.do">
-                                    <label>
-                                        面试时间：
-                                        <input type="date" name="apTime">
-                                    </label>
-                                        <input class="apId" type="hidden" name="apId" value="<c:out value="${application.apId}"/>">
-                                    </form>
-                                </li>
-                                <button class="accept" onclick="goInterview(this)">接受</button>
-                                <button class="reject" onclick="endApp(this)">拒绝</button>
-                            </c:when>
-                            <c:when test="${application.apState=='录用'}">
-                                <button class="accept" onclick="goWork(this)">接受</button>
-                                <button class="reject" onclick="endApp(this)">拒绝</button>
-                            </c:when>
-                            <c:when test="${application.apState=='拒绝'}">
-                                <button onclick="delApp(this)">删除记录</button>
-                            </c:when>
-                            <c:otherwise>
-                                <button onclick="endApp(this)">取消</button>
-                            </c:otherwise>
-                        </c:choose>
-                    </ul>
-                    <ul id="resume">
-                        <li>姓名：${application.apViId.viResume.rsBasic.bsName}</li>
-                        <li>
-                            <span>性别：${application.apViId.viResume.rsBasic.bsGender}</span>
-                            <span>出生日期：${application.apViId.viResume.rsBasic.bsBirth}</span>
-                        </li>
-                        <li>电话：${application.apViId.viResume.rsBasic.bsPhone}</li>
-                        <li>住址：${application.apViId.viResume.rsBasic.bsAddress}</li>
-                        <li>Email：${application.apViId.viResume.rsBasic.bsEmail}</li>
-                        <li>学历：${application.apViId.viResume.rsEducation}</li>
-                        <li>专业：${application.apViId.viResume.rsMajor}</li>
-                        <li>技能：${application.apViId.viResume.rsSkills}</li>
-                        <li>证书：${application.apViId.viResume.rsAward}</li>
-                        <li>经历：${application.apViId.viResume.rsExperience}</li>
-                        <li>自我介绍：${application.apViId.viResume.rsIntroduction}</li>
-                    </ul>
+                        <c:when test="${app.apState=='已读'|| app.apState=='拒绝'||app.apState=='录用'}">
+                            <li class="app" hidden>
+                                <span  class="apState"><c:out value="${app.apState}"/></span>
+                                <span hidden class="apId">${app.apId}</span>
+                                <a href="showApplication.do?apId=${app.apId}">
+                                    求职人：<c:out value="${app.apViId.viResume.rsBasic.bsName}"/>
+                                </a>
+                                学历：<c:out value="${app.apViId.viResume.rsEducation}"/>
+                                投递日期：<c:out value="${app.apDate}"/>
+                                职位：<c:out value="${recruitment.rcJId}"/>
+                                发布日期：<c:out value="${recruitment.rcDate}"/>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="app">
+                                <span class="apState"><c:out value="${app.apState}"/></span>
+                                <span hidden class="apId">${app.apId}</span>
+                                <a href="showApplication.do?apId=${app.apId}">
+                                    求职人：<c:out value="${app.apViId.viResume.rsBasic.bsName}"/>
+                                </a>
+                                学历：<c:out value="${app.apViId.viResume.rsEducation}"/>
+                                投递日期：<c:out value="${app.apDate}"/>
+                                职位：<c:out value="${recruitment.rcJId}"/>
+                                发布日期：<c:out value="${recruitment.rcDate}"/>
+                            </li>
+                        </c:otherwise>
+
+                    </c:choose>
                 </c:forEach>
+                </ul>
+            </c:forEach>
+        </div>
+        <div id="department">
+            <c:forEach items="${requestScope.departments}" var="department">
+                <div class="floor">
+                    <table class="dp">
+                        <tr>
+                        </tr>
+                        <tr>
+                            <td><button type="button" class="spread" onclick="spreadjob(this)">+展开</button></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table hidden class="job">
+                                    <c:forEach items="${department.dpJobs}" var="job">
+                                        <tr>
+                                            <button type="button" class="spread" onclick="spreadee(this)">+展开</button>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table hidden class="ee">
+                                                    <c:forEach items="${job.jEmployees}" var="employee">
+                                                        <tr>
+
+                                                        </tr>
+                                                    </c:forEach>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </c:forEach>
         </div>
     </div>
 </div>
 </body>
 </html>
+
+
+

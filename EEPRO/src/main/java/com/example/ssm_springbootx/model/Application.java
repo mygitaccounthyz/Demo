@@ -8,9 +8,9 @@ public class Application implements Serializable {
 
     private int apId;
 
-    private String  apState;//未读、已读、面试|拒绝、录用|拒绝
-    private Timestamp apTime;//面试时间
+    private String apState;//未读、已读、面试、接受面试、录用、拒绝
     private Date apDate;//投递时间
+    private Timestamp apTime;//面试时间
 
     private Recruitment apRcId;//招聘信息
     private Visitor apViId;//游客

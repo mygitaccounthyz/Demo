@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -37,6 +38,11 @@ public class ApplicationController {
         return "recruitment";
     }
 
+    @RequestMapping("interview.do")
+    public void interview(){
+
+    }
+
     @RequestMapping("goInterview.do")
     public void goInterview(int apId,HttpSession session, HttpServletResponse response)
             throws IOException {
@@ -55,6 +61,16 @@ public class ApplicationController {
         if (applicationService.updateApplication(application)){
             response.getWriter().write("1");
         }else response.getWriter().write("0");
+    }
+
+    @RequestMapping("hire.do")
+    public void hire(int apId, HttpServletResponse response) throws IOException {
+        Application application = applicationService.getApplication(new Application(apId));
+        application.setApState("录用");
+        if (applicationService.updateApplication(application)){
+            response.getWriter().write("1");
+        }
+        response.getWriter().write("0");
     }
 
     @RequestMapping("goWork.do")
@@ -104,5 +120,15 @@ public class ApplicationController {
         }else response.getWriter().write("0");
     }
 
+    @RequestMapping("showApplication.do")
+    public String showApplication(int apId, HttpServletRequest request){
+        Application app = applicationService.getApplication(new Application(apId));
+        if (app.getApState().equals("未读")){
+            app.setApState("已读");
+            applicationService.updateApplication(app);
+        }
+        request.setAttribute("app",app);
+        return "showApplication";
+    }
 
 }

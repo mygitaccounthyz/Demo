@@ -47,25 +47,22 @@
 
         <where>
             <if test="eeId!=0">
-                EE_ID=#{eeId}
+               and EE_ID=#{eeId}
             </if>
             <if test="eeName!=null">
-                EE_NAME=#{eeName}
+               and EE_NAME=#{eeName}
             </if>
             <if test="eePass!=null">
-                EE_PASS=#{eePass}
+               and EE_PASS=#{eePass}
             </if>
         </where>
     </select>
 
     <select id="getEmployees" resultMap="employee">
         select * from T_EMPLOYEE
-
         LEFT OUTER JOIN T_JOB ON EE_JID=J_ID
         left outer join T_DEPARTMENT on J_DPID=DP_ID
-
         LEFT OUTER JOIN T_BASIC ON EE_ID=BS_EEID
-
         LEFT OUTER JOIN T_EEINFORMATION ON EI_EEID=EE_ID
         LEFT OUTER JOIN T_SALARY ON SL_EIID = EI_ID
         LEFT OUTER JOIN T_DEAL ON DL_EIID =EI_ID
@@ -75,7 +72,7 @@
 
         <where>
             <if test="eeJId!=null eeJId.jId!=0">
-                EE_JID=#{eeJId.jId}
+               and EE_JID=#{eeJId.jId}
             </if>
             <if test="eeState!=null">
                and EE_STATE=#{eeState}

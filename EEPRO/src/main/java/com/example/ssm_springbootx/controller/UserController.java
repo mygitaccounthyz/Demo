@@ -1,11 +1,11 @@
 package com.example.ssm_springbootx.controller;
 
+import com.example.ssm_springbootx.dao.DepartmentDao;
 import com.example.ssm_springbootx.dao.EmployeeDao;
-import com.example.ssm_springbootx.model.Application;
-import com.example.ssm_springbootx.model.Employee;
-import com.example.ssm_springbootx.model.User;
-import com.example.ssm_springbootx.model.Visitor;
+import com.example.ssm_springbootx.dao.RecruitmentDao;
+import com.example.ssm_springbootx.model.*;
 import com.example.ssm_springbootx.service.ApplicationService;
+import com.example.ssm_springbootx.service.DepartmentService;
 import com.example.ssm_springbootx.service.EmployeeService;
 import com.example.ssm_springbootx.service.VisitorService;
 import org.springframework.stereotype.Controller;
@@ -21,10 +21,11 @@ public class UserController {
     @Resource
     private VisitorService visitorService;
     @Resource
-    private ApplicationService applicationService;
-
+    private RecruitmentDao recruitmentDao;
     @Resource
     private EmployeeService employeeService;
+    @Resource
+    private DepartmentService departmentService;
 
     @RequestMapping("login.do")
     public String login(Visitor visitor0,Employee employee0,
@@ -50,9 +51,11 @@ public class UserController {
     }
 
     @RequestMapping("admin.do")
-    public String adminInit(HttpSession session){
-        List<Application> applications = applicationService.getApplications(new Application());
-        session.setAttribute("apps",applications);
+    public String adminInit(HttpServletRequest request){
+        List<Recruitment> recruitments = recruitmentDao.getRecruitments(new Recruitment());
+        List<Department> departments = departmentService.getDepartments(new Department());
+        request.setAttribute("recruitments",recruitments);
+        request.setAttribute("departments",departments);
         return "admin";
     }
 
@@ -80,4 +83,11 @@ public class UserController {
         }
         return "register";
     }
+
+    @RequestMapping("quit.do")
+    public String quit(HttpSession session){
+        session.removeAttribute("user");
+        return "index";
+    }
+
 }

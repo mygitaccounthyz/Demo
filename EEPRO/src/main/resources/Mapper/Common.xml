@@ -96,6 +96,7 @@
         <result property="rsExperience" column="RS_EXPERIENCE"/>
         <result property="rsSkills" column="RS_SKILLS"/>
         <result property="rsIntroduction" column="RS_INTRODUCTION"/>
+        <result property="rsGraduation" column="RS_GRADUATION"/>
         <result property="rsViId" column="RS_VIID"/>
     </resultMap>
 

@@ -45,14 +45,14 @@
         function goWork(button){
             var $button =$(button);
             var apId = $button.parents(".apId").val();
-            $.get("goWork.do",{"apId":apId,"apState":"接受录用"},function (res) {
+            $.get("goWork.do",{"apId":apId},function (res) {
 
             })
         }
         function endApp(button){
             var $button =$(button);
             var apId = $button.parents(".apId").val();
-            $.get("endApp.do",{"apId":apId,"apState":"拒绝"},function (res) {
+            $.get("endApp.do",{"apId":apId},function (res) {
 
             })
         }
@@ -98,10 +98,10 @@
                         </td>
 
                         <td>
-                            <sapn>
+                            <span>
                                 性别：
                                 ${sessionScope.user.viResume.rsBasic.bsGender}
-                            </sapn>
+                            </span>
                         </td>
                     </tr>
 
@@ -143,6 +143,12 @@
                             <span>
                                 学历：
                                 ${sessionScope.user.viResume.rsEducation}
+                            </span>
+                        </td>
+                        <td>
+                            <span>
+                                毕业院校：
+                                ${sessionScope.user.viResume.rsGraduation}
                             </span>
                         </td>
                         <td>

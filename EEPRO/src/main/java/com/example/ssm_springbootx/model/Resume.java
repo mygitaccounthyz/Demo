@@ -12,6 +12,7 @@ public class Resume implements Serializable {
     private String rsSkills;
     private String rsAward;
     private String rsIntroduction;
+    private String rsGraduation;
 
     private int rsViId;
 
@@ -27,7 +28,7 @@ public class Resume implements Serializable {
     }
 
     public Resume(int rsViId, String rsEducation, String rsMajor,
-                  String rsExperience, String rsCharacter,
+                  String rsExperience, String rsGraduation,
                   String rsSkills, String rsAward, String rsIntroduction) {
         this.rsViId = rsViId;
         this.rsEducation = rsEducation;
@@ -36,6 +37,15 @@ public class Resume implements Serializable {
         this.rsSkills = rsSkills;
         this.rsAward = rsAward;
         this.rsIntroduction = rsIntroduction;
+        this.rsGraduation=rsGraduation;
+    }
+
+    public String getRsGraduation() {
+        return rsGraduation;
+    }
+
+    public void setRsGraduation(String rsGraduation) {
+        this.rsGraduation = rsGraduation;
     }
 
     public Basic getRsBasic() {
