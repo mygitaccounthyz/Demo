@@ -7,10 +7,14 @@ import java.util.Date;
 public class Application implements Serializable {
 
     private int apId;
-    private int apRcId;//招聘信息
-    private int apViId;//游客
-    private Timestamp apTime;//面试时间
+
     private String  apState;//未读、已读、面试|拒绝、录用|拒绝
+    private Timestamp apTime;//面试时间
+    private Date apDate;//投递时间
+
+    private Recruitment apRcId;//招聘信息
+    private Visitor apViId;//游客
+
 
     public Application() {
     }
@@ -19,12 +23,21 @@ public class Application implements Serializable {
         this.apId = apId;
     }
 
-    public Application(int apRcId, int apViId) {
+    public Application(Recruitment apRcId, Visitor apViId) {
         this.apRcId = apRcId;
         this.apViId = apViId;
-        this.apTime = new Timestamp(new Date().getTime());
+        this.apDate = new Date();
         this.apState="未读";
     }
+
+    public Date getApDate() {
+        return apDate;
+    }
+
+    public void setApDate(Date apDate) {
+        this.apDate = apDate;
+    }
+
 
     public int getApId() {
         return apId;
@@ -34,19 +47,19 @@ public class Application implements Serializable {
         this.apId = apId;
     }
 
-    public int getApRcId() {
+    public Recruitment getApRcId() {
         return apRcId;
     }
 
-    public void setApRcId(int apRcId) {
+    public void setApRcId(Recruitment apRcId) {
         this.apRcId = apRcId;
     }
 
-    public int getApViId() {
+    public Visitor getApViId() {
         return apViId;
     }
 
-    public void setApViId(int apViId) {
+    public void setApViId(Visitor apViId) {
         this.apViId = apViId;
     }
 

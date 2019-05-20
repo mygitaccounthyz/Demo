@@ -5,14 +5,19 @@ import java.io.Serializable;
 public class Resume implements Serializable {
 
     private int rsId;
-    private int rsEEId;
-    private int rsViId;
+//    private int rsEEId;
     private String rsEducation;
     private String rsMajor;
     private String rsExperience;
     private String rsSkills;
     private String rsAward;
     private String rsIntroduction;
+
+    private int rsViId;
+
+    private Basic rsBasic;
+
+
 
     public Resume() {
     }
@@ -33,6 +38,14 @@ public class Resume implements Serializable {
         this.rsIntroduction = rsIntroduction;
     }
 
+    public Basic getRsBasic() {
+        return rsBasic;
+    }
+
+    public void setRsBasic(Basic rsBasic) {
+        this.rsBasic = rsBasic;
+    }
+
     public int getRsId() {
         return rsId;
     }
@@ -41,13 +54,13 @@ public class Resume implements Serializable {
         this.rsId = rsId;
     }
 
-    public int getRsEEId() {
-        return rsEEId;
-    }
-
-    public void setRsEEId(int rsEEId) {
-        this.rsEEId = rsEEId;
-    }
+//    public int getRsEEId() {
+//        return rsEEId;
+//    }
+//
+//    public void setRsEEId(int rsEEId) {
+//        this.rsEEId = rsEEId;
+//    }
 
     public int getRsViId() {
         return rsViId;

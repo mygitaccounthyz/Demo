@@ -6,11 +6,23 @@ import java.util.Date;
 public class Deal implements Serializable {
 
     private int dlId;
-    private int dlEEId;
-    private int dlAtId;
+
+    private int dlEiId;
+//    private int dlAtId;
     private int dlMoney;
     private String dlReason;
-    private Date dlTime;
+    private Date dlDate;
+//
+    private Attendance dlAttendance;
+
+    public Attendance getDlAttendance() {
+        return dlAttendance;
+    }
+
+    public void setDlAttendance(Attendance dlAttendance) {
+        this.dlAttendance = dlAttendance;
+    }
+//
 
     public Deal() {
     }
@@ -19,12 +31,12 @@ public class Deal implements Serializable {
         this.dlId = dlId;
     }
 
-    public Deal(int dlEEId, int dlMoney,
+    public Deal(int dlEiId, int dlMoney,
                 String dlReason) {
-        this.dlEEId = dlEEId;
+        this.dlEiId = dlEiId;
         this.dlMoney = dlMoney;
         this.dlReason = dlReason;
-        this.dlTime = new Date();
+        this.dlDate = new Date();
     }
 
     public int getDlId() {
@@ -35,21 +47,21 @@ public class Deal implements Serializable {
         this.dlId = dlId;
     }
 
-    public int getDlEEId() {
-        return dlEEId;
+    public int getDlEiId() {
+        return dlEiId;
     }
 
-    public void setDlEEId(int dlEEId) {
-        this.dlEEId = dlEEId;
+    public void setDlEiId(int dlEiId) {
+        this.dlEiId = dlEiId;
     }
 
-    public int getDlAtId() {
-        return dlAtId;
-    }
-
-    public void setDlAtId(int dlAtId) {
-        this.dlAtId = dlAtId;
-    }
+//    public int getDlAtId() {
+//        return dlAtId;
+//    }
+//
+//    public void setDlAtId(int dlAtId) {
+//        this.dlAtId = dlAtId;
+//    }
 
     public int getDlMoney() {
         return dlMoney;
@@ -67,11 +79,11 @@ public class Deal implements Serializable {
         this.dlReason = dlReason;
     }
 
-    public Date getDlTime() {
-        return dlTime;
+    public Date getDlDate() {
+        return dlDate;
     }
 
-    public void setDlTime(Date dlTime) {
-        this.dlTime = dlTime;
+    public void setDlDate(Date dlDate) {
+        this.dlDate = dlDate;
     }
 }

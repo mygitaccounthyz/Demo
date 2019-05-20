@@ -6,14 +6,17 @@ import java.sql.Date;
 public class Basic implements Serializable {
 
     private int bsId;
-    private int bsEEId;
-    private int bsViId;
+
+    private int bsEEId;//员工账号
+    private int bsRsId;//引用简历
+
     private String bsName;
+    private String bsGender;
+    private Date bsBirth;
     private String bsPhone;
     private String bsAddress;
-    private String bsGender;
     private String bsEmail;
-    private Date bsBirth;
+
 
 
     public Basic() {
@@ -25,14 +28,14 @@ public class Basic implements Serializable {
 
     public Basic(String bsName, String bsPhone,
                  String bsAddress, String bsGender,
-                 String bsEmail, Date bsBirth,  int bsViId) {
+                 String bsEmail, Date bsBirth,  int bsRsId) {
         this.bsName = bsName;
         this.bsPhone = bsPhone;
         this.bsAddress = bsAddress;
         this.bsGender = bsGender;
         this.bsEmail = bsEmail;
         this.bsBirth = bsBirth;
-        this.bsViId = bsViId;
+        this.bsRsId = bsRsId;
     }
 
 
@@ -101,11 +104,11 @@ public class Basic implements Serializable {
         this.bsEEId = bsEEId;
     }
 
-    public int getBsViId() {
-        return bsViId;
+    public int getBsRsId() {
+        return bsRsId;
     }
 
-    public void setBsViId(int bsViId) {
-        this.bsViId = bsViId;
+    public void setBsRsId(int bsRsId) {
+        this.bsRsId = bsRsId;
     }
 }

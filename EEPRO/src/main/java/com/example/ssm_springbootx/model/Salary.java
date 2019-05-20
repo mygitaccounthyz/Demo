@@ -6,11 +6,14 @@ import java.util.Date;
 public class Salary implements Serializable {
 
     private int slId;
-    private int slEEId;
+
+    private int slEiId;
+
     private int slDlMoney;
-    private int slPayment;
-    private String slState;//未结算、结算、复议
     private Date slDate;
+    private String slState;//未结算、结算、复议
+    private int slPayment;
+
 
     public Salary() {
     }
@@ -19,9 +22,9 @@ public class Salary implements Serializable {
         this.slId = slId;
     }
 
-    public Salary(int slEEId, int slDlMoney, int slPayment,
-                   Date slDate) {
-        this.slEEId = slEEId;
+    public Salary(int slEiId, int slDlMoney, int slPayment,
+                  Date slDate) {
+        this.slEiId = slEiId;
         this.slDlMoney = slDlMoney;
         this.slPayment = slPayment;
         this.slState = "未结算";
@@ -36,12 +39,12 @@ public class Salary implements Serializable {
         this.slId = slId;
     }
 
-    public int getSlEEId() {
-        return slEEId;
+    public int getSlEiId() {
+        return slEiId;
     }
 
-    public void setSlEEId(int slEEId) {
-        this.slEEId = slEEId;
+    public void setSlEiId(int slEiId) {
+        this.slEiId = slEiId;
     }
 
     public int getSlDlMoney() {

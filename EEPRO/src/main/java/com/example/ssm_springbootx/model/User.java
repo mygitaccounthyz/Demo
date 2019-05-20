@@ -1,13 +1,9 @@
 package com.example.ssm_springbootx.model;
 
-import java.io.Serializable;
+public interface User {
 
-public abstract class User implements Serializable {
-
-    abstract public int getId();
-
-    abstract public String getName();
-
-    abstract public String getPass();
+    int getId();
+    String getName();
+    String getPass();
 
 }

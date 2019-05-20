@@ -1,14 +1,20 @@
 package com.example.ssm_springbootx.model;
 
-public class Employee extends User{
+import java.io.Serializable;
 
+public class Employee implements User, Serializable {
+//basic
     private int eeId;
     private String eeName;
     private String eePass;
-    private int eeBsId;
-    private int eeJId;
-    private int eeViId;
     private String eeState;//在职、离职
+//fk
+    private int eeViId;
+    private Job eeJId;//双向int->Job
+//ex-ref
+    private Basic eeBsId;
+    private EEInformation eeInformation;
+
 
     public Employee() {
     }
@@ -17,13 +23,22 @@ public class Employee extends User{
         this.eeId = eeId;
     }
 
-    public Employee(String eeName, String eePass, int eeBsId, int eeJId, int eeViId) {
+    public Employee(String eeName, String eePass, Basic eeBsId,
+                    Job eeJId, int eeViId) {
         this.eeName = eeName;
         this.eePass = eePass;
         this.eeBsId = eeBsId;
         this.eeJId = eeJId;
         this.eeViId = eeViId;
         this.eeState="在职";
+    }
+
+    public EEInformation getEeInformation() {
+        return eeInformation;
+    }
+
+    public void setEeInformation(EEInformation eeInformation) {
+        this.eeInformation = eeInformation;
     }
 
     public int getEeId() {
@@ -50,19 +65,19 @@ public class Employee extends User{
         this.eePass = eePass;
     }
 
-    public int getEeBsId() {
+    public Basic getEeBsId() {
         return eeBsId;
     }
 
-    public void setEeBsId(int eeBsId) {
+    public void setEeBsId(Basic eeBsId) {
         this.eeBsId = eeBsId;
     }
 
-    public int getEeJId() {
+    public Job getEeJId() {
         return eeJId;
     }
 
-    public void setEeJId(int eeJId) {
+    public void setEeJId(Job eeJId) {
         this.eeJId = eeJId;
     }
 

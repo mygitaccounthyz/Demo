@@ -6,11 +6,15 @@ import java.sql.Timestamp;
 public class Attendance implements Serializable {
 
     private int atId;
-    private int atEEId;
-    private Timestamp atOnTime;
-    private Timestamp atOffTime;
+
+    private int atEiId;
+    private int atDlId;
+//    private Timestamp atOnTime;
+//    private Timestamp atOffTime;
     private Timestamp atOn;
     private Timestamp atOff;
+
+
 
     public Attendance() {
     }
@@ -19,12 +23,19 @@ public class Attendance implements Serializable {
         this.atId = atId;
     }
 
-    public Attendance(int atEEId, Timestamp atOnTime,
-                      Timestamp atOffTime, Timestamp atOn) {
-        this.atEEId = atEEId;
-        this.atOnTime = atOnTime;
-        this.atOffTime = atOffTime;
+    public Attendance(int atEiId, Timestamp atOn) {
+        this.atEiId = atEiId;
+//        this.atOnTime = atOnTime;
+//        this.atOffTime = atOffTime;
         this.atOn = atOn;
+    }
+
+    public int getAtDlId() {
+        return atDlId;
+    }
+
+    public void setAtDlId(int atDlId) {
+        this.atDlId = atDlId;
     }
 
     public int getAtId() {
@@ -35,29 +46,29 @@ public class Attendance implements Serializable {
         this.atId = atId;
     }
 
-    public int getAtEEId() {
-        return atEEId;
+    public int getAtEiId() {
+        return atEiId;
     }
 
-    public void setAtEEId(int atEEId) {
-        this.atEEId = atEEId;
+    public void setAtEiId(int atEiId) {
+        this.atEiId = atEiId;
     }
 
-    public Timestamp getAtOnTime() {
-        return atOnTime;
-    }
-
-    public void setAtOnTime(Timestamp atOnTime) {
-        this.atOnTime = atOnTime;
-    }
-
-    public Timestamp getAtOffTime() {
-        return atOffTime;
-    }
-
-    public void setAtOffTime(Timestamp atOffTime) {
-        this.atOffTime = atOffTime;
-    }
+//    public Timestamp getAtOnTime() {
+//        return atOnTime;
+//    }
+//
+//    public void setAtOnTime(Timestamp atOnTime) {
+//        this.atOnTime = atOnTime;
+//    }
+//
+//    public Timestamp getAtOffTime() {
+//        return atOffTime;
+//    }
+//
+//    public void setAtOffTime(Timestamp atOffTime) {
+//        this.atOffTime = atOffTime;
+//    }
 
     public Timestamp getAtOn() {
         return atOn;

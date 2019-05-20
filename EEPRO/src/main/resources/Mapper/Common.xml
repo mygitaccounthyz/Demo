@@ -8,38 +8,44 @@
         <id property="apId" column="AP_ID"/>
         <result property="apState" column="AP_STATE"/>
         <result property="apTime" column="AP_TIME"/>
+        <result property="apDate" column="AP_DATE"/>
         <!--<result property="apRcId" column="AP_RCID"/>-->
         <!--<result property="apViId" column="AP_VIID"/>-->
     </resultMap>
-    
+
+    <!--viBasic-->
     <resultMap id="ATTENDANCE" type="com.example.ssm_springbootx.model.Attendance">
         <id property="atId" column="AT_ID"/>
         <result property="atOff" column="AT_OFF"/>
         <result property="atOn" column="AT_ON"/>
-        <result property="atOffTime" column="AT_OFFTIME"/>
-        <result property="atOnTime" column="AT_ONTIME"/>
-        <!--<result property="atEEId" column="AT_EEID"/>-->
+        <result property="atEiId" column="AT_EEID"/>
+        <result property="atDlId" column="AT_DLID"/>
+        <!--<result property="atOffTime" column="AT_OFFTIME"/>-->
+        <!--<result property="atOnTime" column="AT_ONTIME"/>-->
+
     </resultMap>
-    
+
+    <!--viBasic-->
     <resultMap id="BASIC" type="com.example.ssm_springbootx.model.Basic">
         <id property="bsId" column="BS_ID"/>
         <result property="bsName" column="BS_NAME"/>
         <result property="bsPhone" column="BS_PHONE"/>
         <result property="bsAddress" column="BS_ADDRESS"/>
         <result property="bsGender" column="BS_GENDER"/>
-        <result property="bsBirth" column="BS_BIRTH"/>
         <result property="bsEmail" column="BS_EMAIL"/>
-        <!--<result property="bsEEId" column="BS_EEID"/>-->
-        <!--<result property="bsViId" column="BS_VIID"/>-->
+        <result property="bsBirth" column="BS_BIRTH"/>
+
+        <result property="bsEEId" column="BS_EEID"/>
+        <result property="bsRsId" column="BS_RsID"/>
     </resultMap>
     
     <resultMap id="DEAL" type="com.example.ssm_springbootx.model.Deal">
         <id property="dlId" column="DL_ID"/>
         <result property="dlReason" column="DL_REASON"/>
         <result property="dlMoney" column="DL_MONEY"/>
-        <result property="dlTime" column="DL_TIME"/>
+        <result property="dlDate" column="DL_DATE"/>
+        <result property="dlEiId" column="DL_EIID"/>
         <!--<result property="dlAtId" column="DL_ATID"/>-->
-        <!--<result property="dlEEId" column="DL_EEID"/>-->
     </resultMap>
     
     <resultMap id="DEPARTMENT" type="com.example.ssm_springbootx.model.Department">
@@ -47,13 +53,20 @@
         <result property="dpFunction" column="DP_FUNCTION"/>
         <result property="dpName" column="DP_NAME"/>
     </resultMap>
-    
+
+    <resultMap id="EEINFORMATION" type="com.example.ssm_springbootx.model.EEInformation">
+        <id property="eiId" column="EI_ID"/>
+        <result property="eiEeId" column="EI_EEID"/>
+        <result property="eiAccount" column="EI_ACCOUNT"/>
+        <result property="eiIDCard" column="EI_IDCARD"/>
+    </resultMap>
+
     <resultMap id="EMPLOYEE" type="com.example.ssm_springbootx.model.Employee">
         <id property="eeId" column="EE_ID"/>
         <result property="eeName" column="EE_NAME"/>
         <result property="eePass" column="EE_PASS"/>
         <result property="eeState" column="EE_STATE"/>
-        <!--<result property="eeViId" column="EE_VIID"/>-->
+        <result property="eeViId" column="EE_VIID"/>
         <!--<result property="eeJId" column="EE_JID"/>-->
         <!--<result property="eeBsId" column="EE_BSID"/>-->
     </resultMap>
@@ -63,7 +76,8 @@
         <result property="jName" column="J_NAME"/>
         <result property="jState" column="J_STATE"/>
         <result property="jDescription" column="J_DESCRIPTION"/>
-        <!--<result property="jDpId" column="J_DPID"/>-->
+        <result property="jRcId" column="J_RCID"/>
+        <!--<association property="jDpId" resultMap="DEPARTMENT"/>-->
     </resultMap>
     
     <resultMap id="RECRUITMENT" type="com.example.ssm_springbootx.model.Recruitment">
@@ -82,25 +96,31 @@
         <result property="rsExperience" column="RS_EXPERIENCE"/>
         <result property="rsSkills" column="RS_SKILLS"/>
         <result property="rsIntroduction" column="RS_INTRODUCTION"/>
-        <!--<result property="rsViId" column="RS_VIID"/>-->
-        <!--<result property="rsEEId" column="RS_EEID"/>-->
+        <result property="rsViId" column="RS_VIID"/>
     </resultMap>
-    
+
+    <!--viBasic-->
     <resultMap id="SALARY" type="com.example.ssm_springbootx.model.Salary">
         <id property="slId" column="SL_ID"/>
         <result property="slDlMoney" column="SL_DLMONEY"/>
         <result property="slDate" column="SL_DATE"/>
         <result property="slState" column="SL_STATE"/>
         <result property="slPayment" column="SL_PAYMENT"/>
-        <!--<result property="slEEId" column="SL_EEID"/>-->
+        <result property="slEiId" column="SL_EIID"/>
     </resultMap>
-
+    <!--viBasic-->
     <resultMap id="TRAINING" type="com.example.ssm_springbootx.model.Training">
         <id property="trId" column="TR_ID"/>
         <result property="trTitle" column="TR_TITLE"/>
         <result property="trDescription" column="TR_DESCRIPTION"/>
         <result property="trTime" column="TR_TIME"/>
         <result property="trAddress" column="TR_ADDRESS"/>
+    </resultMap>
+
+    <resultMap id="TRMID" type="com.example.ssm_springbootx.model.TrMid">
+        <id property="tmId" column="MID_ID"/>
+        <result property="tmAt" column="MID_AT"/>
+        <result property="tmRes" column="MID_RES"/>
     </resultMap>
 
     <resultMap id="VISITOR" type="com.example.ssm_springbootx.model.Visitor">

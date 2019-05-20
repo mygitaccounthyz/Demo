@@ -5,7 +5,8 @@
 <mapper namespace="com.example.ssm_springbootx.dao.VisitorDao">
 
     <insert id="addVisitor">
-        insert into T_VISITOR (VI_ID, VI_NAME, VI_PASS) VALUES (SEQ_VI.nextval,#{viName},#{viPass})
+        insert into T_VISITOR (VI_ID, VI_NAME, VI_PASS)
+        VALUES (SEQ_VI.nextval,#{viName},#{viPass})
     </insert>
 
     <update id="updateVisitor">
@@ -27,8 +28,17 @@
 
     <select id="getVisitor" resultMap="visitor">
         SELECT * FROM T_VISITOR
-        left outer join T_BASIC on BS_VIID=VI_ID
+
         left outer join T_RESUME on RS_VIID=VI_ID
+        left outer join T_BASIC on BS_RSID=RS_ID
+
+        left outer join T_EMPLOYEE on VI_ID=EE_VIID
+
+        left outer join T_APPLICATION on AP_VIID=VI_ID
+        LEFT OUTER JOIN T_RECRUITMENT ON AP_RCID=RC_ID
+        LEFT OUTER JOIN T_JOB ON J_RCID=RC_ID
+        LEFT OUTER JOIN T_DEPARTMENT ON DP_ID=J_DPID
+
         <where>
         <if test="viId!=0">
         VI_ID=#{viId}
@@ -42,9 +52,13 @@
         </where>
     </select>
 
-    <resultMap id="visitor" type="com.example.ssm_springbootx.model.Visitor" extends="non-orm.VISITOR">
-        <association property="basic" resultMap="non-orm.BASIC" />
-        <association property="resume" resultMap="non-orm.RESUME"/>
+    <resultMap id="VISITOR" type="com.example.ssm_springbootx.model.Visitor" extends="non-orm.VISITOR">
+        <association property="viResume" resultMap="com.example.ssm_springbootx.dao.ResumeDao.resume"/>
+    </resultMap>
+
+    <resultMap id="visitor" type="com.example.ssm_springbootx.model.Visitor" extends="VISITOR">
+        <association property="viEmployee" resultMap="non-orm.EMPLOYEE" />
+        <collection property="viApplications" resultMap="com.example.ssm_springbootx.dao.ApplicationDao.application"/>
     </resultMap>
 
 </mapper>

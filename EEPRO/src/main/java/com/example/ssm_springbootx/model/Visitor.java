@@ -1,30 +1,51 @@
 package com.example.ssm_springbootx.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Visitor extends User {
+public class Visitor implements User , Serializable {
 
     private int viId;
     private String viName;
     private String viPass;
 
-    private Basic basic;
-    private Resume resume;
+//    private Basic viBasic;
+    private Resume viResume;
+    private Employee viEmployee;
 
-    public Basic getBasic() {
-        return basic;
+    private List<Application> viApplications;
+
+//
+    public List<Application> getViApplications() {
+        return viApplications;
     }
 
-    public void setBasic(Basic basic) {
-        this.basic = basic;
+    public void setViApplications(List<Application> viApplications) {
+        this.viApplications = viApplications;
     }
 
-    public Resume getResume() {
-        return resume;
+//    public Basic getViBasic() {
+//        return viBasic;
+//    }
+//
+//    public void setViBasic(Basic viBasic) {
+//        this.viBasic = viBasic;
+//    }
+
+    public Employee getViEmployee() {
+        return viEmployee;
     }
 
-    public void setResume(Resume resume) {
-        this.resume = resume;
+    public void setViEmployee(Employee viEmployee) {
+        this.viEmployee = viEmployee;
+    }
+
+    public Resume getViResume() {
+        return viResume;
+    }
+
+    public void setViResume(Resume viResume) {
+        this.viResume = viResume;
     }
 
     public Visitor() {

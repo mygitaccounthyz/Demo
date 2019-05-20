@@ -2,6 +2,7 @@ package com.example.ssm_springbootx.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Training implements Serializable {
 
@@ -10,6 +11,20 @@ public class Training implements Serializable {
     private String  trDescription;
     private String trAddress;
     private Timestamp trTime;
+
+//
+    private List<Employee> trEmployees;
+
+    public List<Employee> getEmployees() {
+        return trEmployees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.trEmployees = employees;
+    }
+
+//
+
 
     public Training() {
     }
