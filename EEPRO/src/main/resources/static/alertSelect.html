@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.1.0.js"></script>
+    <script>
+        function al() {
+
+            alert($("#num").val())
+
+
+
+        }
+        $(function () {
+            var abc = $("#toshow").data("to");
+            alert($("#"+abc).val())
+        })
+    </script>
+</head>
+<body>
+
+<input id="toshow" data-to="show">
+<input id="show" value="success">
+
+
+<select id="num" name="num">
+    <option value="123">123</option>
+    <option value="456">456</option>
+</select>
+
+<button onclick="al()">alert</button>
+</body>
+</html>

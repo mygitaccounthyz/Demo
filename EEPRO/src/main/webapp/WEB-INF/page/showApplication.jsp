@@ -93,10 +93,10 @@
                     </td>
 
                     <td>
-                        <sapn>
+                        <span>
                             性别：
                             ${requestScope.app.apViId.viResume.rsBasic.bsGender}
-                        </sapn>
+                        </span>
                     </td>
                 </tr>
 
