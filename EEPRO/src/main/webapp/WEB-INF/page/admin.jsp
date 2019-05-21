@@ -22,12 +22,11 @@
     <title>admin</title>
     <script src="js/jquery-3.1.0.js"></script>
     <script>
-        function spreadjob(button) {
-            var $button = $(button);
-        }
-        function spreadee(button) {
-            var $button = $(button);
-        }
+
+        $(function () {
+
+        })
+
 
     </script>
 </head>
@@ -38,6 +37,24 @@
         <a href="transfer?target=index">首页  </a>
     </div>
     <div id="container">
+        <div id="navigate" style="text-align: center">
+            <span></span>
+        </div>
+        <div id="selector">
+            <c:forEach items="${sessionScope.departments}" var="department">
+                <div class="dpfloor">
+                    <label>
+                            ${department.dpName}<input type="checkbox" name="dpId" value="${department.dpId}">
+                    </label>
+                    <br>
+                    <c:forEach items="${department.dpJobs}" var="job">
+                        <div class="jfloor">
+                            <input type="checkbox" name="jId" value="${department.dpJobs}">
+                        </div>
+                    </c:forEach>
+                </div>
+            </c:forEach>
+        </div>
         <div id="recruitments">
             <c:forEach items="${requestScope.recruitments}" var="recruitment">
                 <ul>
@@ -76,41 +93,21 @@
                 </ul>
             </c:forEach>
         </div>
-        <div id="department">
-            <c:forEach items="${requestScope.departments}" var="department">
-                <div class="floor">
-                    <table class="dp">
-                        <tr>
-                        </tr>
-                        <tr>
-                            <td><button type="button" class="spread" onclick="spreadjob(this)">+展开</button></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table hidden class="job">
-                                    <c:forEach items="${department.dpJobs}" var="job">
-                                        <tr>
-                                            <button type="button" class="spread" onclick="spreadee(this)">+展开</button>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <table hidden class="ee">
-                                                    <c:forEach items="${job.jEmployees}" var="employee">
-                                                        <tr>
 
-                                                        </tr>
-                                                    </c:forEach>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </c:forEach>
+        <div id="department">
+            <form action="">
+                <label for="departments">部门：</label>
+                <select name="dpId" id="departments"></select>
+                <label for="jobs">职位：</label>
+                <select name=jId id="jobs"></select>
+                <label for="employees">员工：</label>
+                <select name="eeId" id="employees"></select>
+                <button></button>
+                <button></button>
+            </form>
         </div>
+
+
     </div>
 </div>
 </body>

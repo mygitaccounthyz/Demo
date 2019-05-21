@@ -27,30 +27,24 @@
 
     <select id="getApplication" resultMap="application">
         select * from T_APPLICATION
-
         left outer join T_RECRUITMENT on AP_RCID=RC_ID
         left outer join T_JOB on J_RCID=RC_ID
         left outer join T_DEPARTMENT on J_DPID=DP_ID
-
         left outer join T_VISITOR on AP_VIID=VI_ID
         left outer join T_RESUME on RS_VIID=VI_ID
         left outer join T_BASIC on BS_RSID=RS_ID
-
         where AP_ID=#{apId};
     </select>
 
     <select id="getApplications" resultMap="application">
         select * from T_APPLICATION
-
         left outer join T_RECRUITMENT on AP_RCID=RC_ID
         left outer join T_JOB on RC_JID=J_ID
         left outer join T_DEPARTMENT on J_DPID=DP_ID
-
         left outer join T_VISITOR on AP_VIID=VI_ID
         left outer join T_RESUME on RS_VIID=VI_ID
         left outer join T_BASIC on BS_RSID=RS_ID
         <where>
-
             <if test="apRcId!=null and apRcId.rcId!=0">
                 AP_RCID=#{apRcId.rcId}
             </if>

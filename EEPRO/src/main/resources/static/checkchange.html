@@ -10,42 +10,54 @@
             //     var $character= $(this);
             //     var character=$character.val();
             //     alert(character);
-            //
             // });
-
             // $(":radio[value='b']").change(function () {
             //     alert("bing,change")
             // });
-
             // var x = confirm("check");
             // alert(x)
             // var y = prompt("输入 abc");
             // alert(y)
+            // $(":radio[value='bbb']").attr("checked",true)
 
+            var js ={"name1":"name","pass":"pass"};
+            $("#save").data("origin",js);
 
-            $(":radio[value='bbb']").attr("checked",true)
-        })
-        function al() {
-            var time = $("#time").val();
-            alert(time)
-        }
+            alert($("#save").data("origin")["pass"]);
+            alert($("#test").data("demo"))
+
+            $(".hide").hide()
+        });
+        // function al() {
+        //     var time = $("#time").val();
+        //     alert(time)
+        // }
     </script>
 
 </head>
 <body>
+<select>
+    <span >
+        <option >abc</option>
+        <option >XXX</option>
+    </span>
+    <option >xyz</option>
+</select>
 
+
+<input id="save">
+<input id="test" data-demo="demo">
 <input type="radio" name="a" value="b" >b <br>
 <input type="radio" name="a" value="bbb">bbb <br>
 <button onclick="al()">alert</button>
 <input id="time" type="datetime-local">
 <ul>
-    <li>
-        1
-        <p>p0</p>
+    <li class="hide">
         <a href="#">anchor</a>
     </li>
-    <li>2</li>
-    <p>p1</p>
+    <li class="hide">2</li>
+
 </ul>
+
 </body>
 </html>

@@ -20,11 +20,9 @@
     <!--ADMIN-->
     <select id="getDepartment" resultMap="department">
         select * from T_DEPARTMENT
-
         LEFT OUTER JOIN T_JOB ON J_DPID=DP_ID
         LEFT OUTER JOIN T_EMPLOYEE ON EE_JID=J_ID
         LEFT OUTER JOIN T_BASIC ON EE_ID=BS_EEID
-
         LEFT OUTER JOIN T_EEINFORMATION ON EI_EEID=EE_ID
         LEFT OUTER JOIN T_SALARY ON SL_EIID = EI_ID
         LEFT OUTER JOIN T_DEAL ON DL_EIID =EI_ID
@@ -32,8 +30,8 @@
         LEFT OUTER JOIN T_TRMID ON MID_EIID = EI_ID
         LEFT OUTER JOIN T_TRAINING ON MID_TRID = TR_ID
         <where>
-            <if test="dpId!=null">
-                DP_ID=#{dpId}
+            <if test="dpId!=0">
+               and DP_ID=#{dpId}
             </if>
             <if test="dpName!=null">
                AND DP_NAME=#{dpName}
@@ -43,11 +41,9 @@
 
     <select id="getDepartments" resultMap="department">
         select * from T_DEPARTMENT
-
         LEFT OUTER JOIN T_JOB ON J_DPID=DP_ID
         LEFT OUTER JOIN T_EMPLOYEE ON EE_JID=J_ID
         LEFT OUTER JOIN T_BASIC ON EE_ID=BS_EEID
-
         LEFT OUTER JOIN T_EEINFORMATION ON EI_EEID=EE_ID
         LEFT OUTER JOIN T_SALARY ON SL_EIID = EI_ID
         LEFT OUTER JOIN T_DEAL ON DL_EIID =EI_ID

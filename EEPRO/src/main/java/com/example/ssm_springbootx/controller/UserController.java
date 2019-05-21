@@ -4,10 +4,7 @@ import com.example.ssm_springbootx.dao.DepartmentDao;
 import com.example.ssm_springbootx.dao.EmployeeDao;
 import com.example.ssm_springbootx.dao.RecruitmentDao;
 import com.example.ssm_springbootx.model.*;
-import com.example.ssm_springbootx.service.ApplicationService;
-import com.example.ssm_springbootx.service.DepartmentService;
-import com.example.ssm_springbootx.service.EmployeeService;
-import com.example.ssm_springbootx.service.VisitorService;
+import com.example.ssm_springbootx.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
@@ -21,16 +18,15 @@ public class UserController {
     @Resource
     private VisitorService visitorService;
     @Resource
-    private RecruitmentDao recruitmentDao;
-    @Resource
     private EmployeeService employeeService;
     @Resource
     private DepartmentService departmentService;
+    @Resource
+    private RecruitmentService recruitmentService;
 
     @RequestMapping("login.do")
     public String login(Visitor visitor0,Employee employee0,
                         String character ,HttpSession session){
-//        System.out.println(visitor0);
         if ("visitor".equals(character)){
             Visitor visitor = visitorService.getVisitor(visitor0);
             if (visitor!=null)
@@ -51,11 +47,11 @@ public class UserController {
     }
 
     @RequestMapping("admin.do")
-    public String adminInit(HttpServletRequest request){
-        List<Recruitment> recruitments = recruitmentDao.getRecruitments(new Recruitment());
+    public String  getDepartments(HttpSession session){
         List<Department> departments = departmentService.getDepartments(new Department());
-        request.setAttribute("recruitments",recruitments);
-        request.setAttribute("departments",departments);
+        session.setAttribute("departments",departments);
+        List<Recruitment> recruitments = recruitmentService.getRecruitments(new Recruitment());
+        session.setAttribute("recruitments",recruitments);
         return "admin";
     }
 
