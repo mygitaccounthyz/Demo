@@ -115,6 +115,52 @@
                 // }
             });
 
+            function createDp(button){
+                
+            }
+            function deleteDp(button){
+                
+            }
+            function updateDp(button){
+                
+            }
+            function createJob(button){
+
+            }
+            function deleteJob(button){
+
+            }
+            function updateJob(button){
+
+            }
+            function createRecruitment(button){
+
+            }
+            function deleteRecruitment(button){
+
+            }
+            function updateRecruitment(button){
+
+            }
+
+            function createTraining(button){
+
+            }
+            function deleteTraining(button){
+
+            }
+            function updateTraining(button){
+
+            }
+            function getDp(button){
+
+            }
+            function getJob(button){
+
+            }
+            
+            
+            
             $(":checkbox[name=jId]").change(function () {
                 var $checkbox = $(this);
                 if ($checkbox.attr("checked")) {
@@ -202,8 +248,20 @@
 
                 <div id="recruitmentList">
                 <c:forEach items="${sessionScope.recruitments}" var="recruitment">
+                    <div id="recruitment">
+                        <ul>
+                            <li>
+                                职位${recruitment.rcJId.jName}
+                                更新日期：${recruitment.rcDate}
+                            </li>
+                            <li>部门${recruitment.rcJId.jDpId.dpName}</li>
+                            <li>职责${recruitment.rcJId.jDescription}</li>
+                            <li>岗位需求${recruitment.rcDescription}</li>
+                        </ul>
+                    </div>
                     <ul>
                         <c:forEach items="${recruitment.rcApplications}" var="app">
+
                             <c:choose>
                                 <c:when test="${app.apState=='已读'|| app.apState=='拒绝'||app.apState=='录用'}">
                                     <li class="app" hidden>
@@ -230,18 +288,6 @@
                                         职位：<c:out value="${recruitment.rcJId}"/>
                                         发布日期：<c:out value="${recruitment.rcDate}"/>
                                     </li>
-
-                                    <div id="recruitment">
-                                        <ul>
-                                            <li>
-                                                职位${app.apRcId.rcJId.jName}
-                                                更新日期：${app.apRcId.rcDate}
-                                            </li>
-                                            <li>部门${app.apRcId.rcJId.jDpId.dpName}</li>
-                                            <li>职责${app.apRcId.rcJId.jDescription}</li>
-                                            <li>岗位需求${app.apRcId.rcDescription}</li>
-                                        </ul>
-                                    </div>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -382,23 +428,29 @@
                                     <span class="button2"></span>
                                 </td>
                             </tr>
-
                         </table>
                     </c:forEach>
                 </div>
-
             </div>
 
             <div class="module" id="department">
 
-                <div>
-                    <button></button>
+                <div >
+                    <button onclick="createDp(this)">新部门</button>
+                    <button onclick="updateDp(this)">修改部门信息</button>
+                    <button onclick="deleteDp(this)">删除部门</button>
+                    <p id="editDp"></p>
+                </div>
+                <div >
+                    <button onclick="createJob(this)">新职位</button>
+                    <button onclick="updateJob(this)">修改职位信息</button>
+                    <button onclick="deleteJob(this)">删除职位</button>
+                    <p id="editJob"></p>
                 </div>
                 <div>
-                    <button>新部门</button>
-                    
+                    <label><select name="newDp" id="newDp" onclick="getDp(this)"></select></label>
+                    <label><select name="newJob" id="newJob" onclick="getJob(this)"></select></label>
                 </div>
-
             </div>
 
             <div class="module" id="training">
