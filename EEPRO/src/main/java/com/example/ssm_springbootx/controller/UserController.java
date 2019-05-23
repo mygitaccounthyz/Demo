@@ -23,6 +23,8 @@ public class UserController {
     private DepartmentService departmentService;
     @Resource
     private RecruitmentService recruitmentService;
+    @Resource
+    private TrainingService trainingService;
 
     @RequestMapping("login.do")
     public String login(Visitor visitor0,Employee employee0,
@@ -52,6 +54,8 @@ public class UserController {
         session.setAttribute("departments",departments);
         List<Recruitment> recruitments = recruitmentService.getRecruitments(new Recruitment());
         session.setAttribute("recruitments",recruitments);
+        List<Training> trainings = trainingService.getTrainings(new Training());
+        session.setAttribute("trainings",trainings);
         return "admin";
     }
 

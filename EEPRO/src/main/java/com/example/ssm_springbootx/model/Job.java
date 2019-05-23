@@ -9,7 +9,7 @@ public class Job implements Serializable {
 
     private String jName;
     private String jDescription;
-    private String jState;//空置、在职
+    private String jState;//
 
     private int jRcId;
     private Department jDpId;//双向int->Department

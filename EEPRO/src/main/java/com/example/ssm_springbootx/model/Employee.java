@@ -111,6 +111,11 @@ public class Employee implements User, Serializable {
     }
 
     @Override
+    public boolean haveResume() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "Employee{" +
                 "eeId=" + eeId +

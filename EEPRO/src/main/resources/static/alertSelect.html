@@ -13,6 +13,8 @@
 
         }
         $(function () {
+            alert($("#labc").text());
+
             var abc = $("#toshow").data("to");
             alert($("#"+abc).val())
         })
@@ -30,5 +32,7 @@
 </select>
 
 <button onclick="al()">alert</button>
+
+<label id="labc"><input value="input">label</label>
 </body>
 </html>

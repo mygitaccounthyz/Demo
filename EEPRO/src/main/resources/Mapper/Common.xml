@@ -13,7 +13,6 @@
         <!--<result property="apViId" column="AP_VIID"/>-->
     </resultMap>
 
-    <!--viBasic-->
     <resultMap id="ATTENDANCE" type="com.example.ssm_springbootx.model.Attendance">
         <id property="atId" column="AT_ID"/>
         <result property="atOff" column="AT_OFF"/>
@@ -25,7 +24,6 @@
 
     </resultMap>
 
-    <!--viBasic-->
     <resultMap id="BASIC" type="com.example.ssm_springbootx.model.Basic">
         <id property="bsId" column="BS_ID"/>
         <result property="bsName" column="BS_NAME"/>
@@ -100,7 +98,7 @@
         <result property="rsViId" column="RS_VIID"/>
     </resultMap>
 
-    <!--viBasic-->
+
     <resultMap id="SALARY" type="com.example.ssm_springbootx.model.Salary">
         <id property="slId" column="SL_ID"/>
         <result property="slDlMoney" column="SL_DLMONEY"/>
@@ -109,7 +107,8 @@
         <result property="slPayment" column="SL_PAYMENT"/>
         <result property="slEiId" column="SL_EIID"/>
     </resultMap>
-    <!--viBasic-->
+
+
     <resultMap id="TRAINING" type="com.example.ssm_springbootx.model.Training">
         <id property="trId" column="TR_ID"/>
         <result property="trTitle" column="TR_TITLE"/>

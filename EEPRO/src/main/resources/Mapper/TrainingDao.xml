@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.ssm_springbootx.dao.TrainingDao">
+
+    <insert id="addTraining">
+        insert into T_TRAINING (TR_ID, TR_TITLE, TR_DESCRIPTION, TR_TIME, TR_ADDRESS)
+        values (SEQ_TR.nextval,#{trTitle},#{trDescription},#{trTime},#{trAddress})
+    </insert>
+    <update id="updateTraining">
+        update T_TRAINING
+        <set>
+            <if test="trDescription!=null">
+                TR_DESCRIPTION=#{trDescription},
+            </if>
+            <if test="trTime!=null">
+                TR_TIME=#{trTime},
+            </if>
+            <if test="trAddress!=null">
+                TR_ADDRESS=#{trAddress},
+            </if>
+        </set>
+        where TR_ID=#{trId}
+    </update>
+
+    <delete id="deleteTraining">
+        delete from T_TRAINING where TR_ID=#{trId}
+    </delete>
+
+    <select id="getTraining" resultType="com.example.ssm_springbootx.model.Training">
+        select * from T_TRAINING
+
+        left outer join T_TRMID on MID_TRID=TR_ID
+        left outer join T_EEINFORMATION on MID_EIID=EI_ID
+        left outer join T_EMPLOYEE on EI_EEID=EE_ID
+        left outer join T_BASIC on BS_EEID=EE_ID
+        left outer join T_JOB on J_ID=EE_JID
+        left outer join T_DEPARTMENT on DP_ID=J_DPID
+
+        where TR_ID=#{trId}
+    </select>
+
+    <select id="getTrainings" resultType="com.example.ssm_springbootx.model.Training">
+        select * from T_TRAINING
+
+        left outer join T_TRMID on MID_TRID=TR_ID
+        left outer join T_EEINFORMATION on MID_EIID=EI_ID
+        left outer join T_EMPLOYEE on EI_EEID=EE_ID
+        left outer join T_BASIC on BS_EEID=EE_ID
+        left outer join T_JOB on J_ID=EE_JID
+        left outer join T_DEPARTMENT on DP_ID=J_DPID
+
+        <where>
+            <if test="trTitle!=null">
+               and TR_TITLE=#{trTitle}
+            </if>
+            <if test="trTime!=null">
+               and TR_TIME &lt; #{trTime}
+            </if>
+        </where>
+    </select>
+
+    <resultMap id="training" type="com.example.ssm_springbootx.model.Training"
+               extends="non-orm.TRAINING">
+        <collection property="trEmployees" resultMap="com.example.ssm_springbootx.dao.EmployeeDao.EMPLOYEE"/>
+        <!--basic+job+dp-->
+    </resultMap>
+
+</mapper>

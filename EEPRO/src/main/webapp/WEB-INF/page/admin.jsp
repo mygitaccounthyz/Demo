@@ -91,6 +91,12 @@
             })
         }
 
+        function createorupdateDp(button){
+
+        }
+
+        function changePosition(button){}
+
         $(function () {
 
             var $apState = $(":input[name=apState]");
@@ -201,15 +207,16 @@
     <div id="banner">
         <a href="quit.do">退出  </a>
         <a href="transfer?target=index">首页  </a>
+        <a href="transfer?target=eeInformation">员工信息  </a>
     </div>
 
     <div id="container">
 
         <div id="navigate" style="text-align: center">
+            <button id="toRectuitment" class="nav" data-to="recruitments">招聘</button>
             <button id="toDepartment" class="nav" data-to="department">部门</button>
             <button id="toTraining" class="nav" data-to="training">培训</button>
-            <button id="toRectuitment" class="nav" data-to="recruitments">招聘</button>
-            <button id="toEEInformation" class="nav" data-to="eeInformation">员工信息</button>
+            <%--<button id="toEEInformation" class="nav" data-to="eeInformation">员工信息</button>--%>
         </div>
         
         <div id="selector">
@@ -247,6 +254,13 @@
             <div class="module" id="recruitments">
 
                 <div id="recruitmentList">
+                    <li><button onclick="createRecruitment(this)">新建招聘信息</button>(先勾选一个职位)</li>
+                    <div id="editRecruitment" hidden>
+                        <label>职位名<input disabled name="jName"></label>
+                        <label>部门<input disabled name="dpName"></label>
+                        <label>岗位要求<input name="rcDescription"></label>
+                        <button onclick="createorupdateRecruitmnet(this)">提交</button>
+                    </div>
                 <c:forEach items="${sessionScope.recruitments}" var="recruitment">
                     <div id="recruitment">
                         <ul>
@@ -257,11 +271,12 @@
                             <li>部门${recruitment.rcJId.jDpId.dpName}</li>
                             <li>职责${recruitment.rcJId.jDescription}</li>
                             <li>岗位需求${recruitment.rcDescription}</li>
+                            <li><button onclick="updateRecruitment(this)">修改需求</button></li>
+                            <li><button onclick="deleteRecruitment(this)">删除需求</button></li>
                         </ul>
                     </div>
                     <ul>
                         <c:forEach items="${recruitment.rcApplications}" var="app">
-
                             <c:choose>
                                 <c:when test="${app.apState=='已读'|| app.apState=='拒绝'||app.apState=='录用'}">
                                     <li class="app" hidden>
@@ -439,27 +454,75 @@
                     <button onclick="createDp(this)">新部门</button>
                     <button onclick="updateDp(this)">修改部门信息</button>
                     <button onclick="deleteDp(this)">删除部门</button>
-                    <p id="editDp"></p>
+                    <p id="editDp" hidden>
+                        <label >
+                            部门名称<input name="dpName">
+                        </label>
+                        <label>
+                            部门职能<input name="dpFunction">
+                        </label>
+                        <button onclick="createorupdateDp(this)">提交</button>
+                    </p>
                 </div>
                 <div >
-                    <button onclick="createJob(this)">新职位</button>
+                    <button onclick="createJob(this)">新职位</button>(先选择一个部门)
                     <button onclick="updateJob(this)">修改职位信息</button>
                     <button onclick="deleteJob(this)">删除职位</button>
-                    <p id="editJob"></p>
+                    <p id="editJob">
+                        <label>职位名称<input name="jName"></label>
+                        <label>部门<input name="jDpId"></label>
+                        <label>岗位职责<input name="jName"></label>
+                        <button onclick="createorupdateJob(this)">提交</button>
+                    </p>
                 </div>
                 <div>
-                    <label><select name="newDp" id="newDp" onclick="getDp(this)"></select></label>
-                    <label><select name="newJob" id="newJob" onclick="getJob(this)"></select></label>
+                    更换岗位
+                    <label><select name="newDp" id="newDp" onchange="getDp(this)"></select></label>
+                    <label><select name="newJob" id="newJob" onchange="getJob(this)"></select></label>
+                    <button onclick="changePosition(this)">提交</button>
                 </div>
             </div>
 
             <div class="module" id="training">
+                <div>
 
+                    <c:forEach items="${sessionScope.trainings}" var="training">
+                        <ul>
+                            <li hidden>
+                                <input type="hidden" name="trId" value="${training.trId}">
+                            </li>
+                            <li>
+                                培训主题:<c:out value="${training.title}"/>
+                            </li>
+                            <li>
+                                培训详情:<c:out value="${training.trDescription}"/>
+                            </li>
+                            <li>
+                                地点:<c:out value="${training.trAddress}"/>
+                            </li>
+                            <li>
+                                培训时间:<c:out value="${training.trTime}"/>
+                            </li>
+                            <li>
+                                <button onclick="updateTraining(this)">修改培训</button>
+                                <button onclick="deleteTraining(this)">删除培训</button>
+                            </li>
+                        </ul>
+                    </c:forEach>
+
+                </div>
+
+                <p id="editTraining">
+                    <label>培训主题<input name="trTitle"></label>
+                    <label>培训主要内容<input name="trDescription"></label>
+                    <label>培训地点<input name="trAddress"></label>
+                    <label>参训时间<input type="datetime-local" name="trTime"></label>
+                    <button onclick="createTraining(this)">新建培训</button>(至少勾选一名参训人员)
+                </p>
             </div>
 
-            <div class="module" id="eeInformation">
-
-            </div>
+            <%--<div class="module" id="eeInformation">--%>
+            <%--</div>--%>
 
         </div>
 

@@ -5,5 +5,5 @@ public interface User {
     int getId();
     String getName();
     String getPass();
-
+    boolean haveResume();
 }

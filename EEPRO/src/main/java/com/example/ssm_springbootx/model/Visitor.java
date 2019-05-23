@@ -98,6 +98,11 @@ public class Visitor implements User , Serializable {
     }
 
     @Override
+    public boolean haveResume() {
+       return this.getViResume()!=null;
+    }
+
+    @Override
     public String toString() {
         return "Visitor{" +
                 "viId=" + viId +
