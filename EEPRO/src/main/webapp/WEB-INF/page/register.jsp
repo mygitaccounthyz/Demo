@@ -18,12 +18,23 @@
     <title>register</title>
 </head>
 <body>
+<div>
+    <div>
+        <a href="transfer?target=index">首页  </a>
+        <a href="transfer?target=login">登录  </a>
+    </div>
     <div>
         <form action="register.do">
-            用户名<input name="viName"><br>
-            密　码<input name="viPass"><br>
+            <label>
+                用户名<input name="viName"><br>
+            </label>
+            <label>
+                密　码<input name="viPass"><br>
+            </label>
             <button>提交</button>
         </form>
     </div>
+</div>
+
 </body>
 </html>

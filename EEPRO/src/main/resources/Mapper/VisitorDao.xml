@@ -28,17 +28,13 @@
 
     <select id="getVisitor" resultMap="visitor">
         SELECT * FROM T_VISITOR
-
         left outer join T_RESUME on RS_VIID=VI_ID
         left outer join T_BASIC on BS_RSID=RS_ID
-
         left outer join T_EMPLOYEE on VI_ID=EE_VIID
-
         left outer join T_APPLICATION on AP_VIID=VI_ID
         LEFT OUTER JOIN T_RECRUITMENT ON AP_RCID=RC_ID
         LEFT OUTER JOIN T_JOB ON J_RCID=RC_ID
         LEFT OUTER JOIN T_DEPARTMENT ON DP_ID=J_DPID
-
         <where>
         <if test="viId!=0">
         VI_ID=#{viId}

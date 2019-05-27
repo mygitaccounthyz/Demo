@@ -16,4 +16,10 @@ public class BasicService {
 
         return basicDao.addBasic(basic);
     }
+
+    public boolean updateBasic(Basic basic) {
+        if (basic==null||basic.getBsId()==0)return false;
+        return basicDao.updateBasic(basic);
+
+    }
 }

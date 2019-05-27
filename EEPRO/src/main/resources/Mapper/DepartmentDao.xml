@@ -31,7 +31,7 @@
         LEFT OUTER JOIN T_TRAINING ON MID_TRID = TR_ID
         <where>
             <if test="dpId!=0">
-               and DP_ID=#{dpId}
+                DP_ID=#{dpId}
             </if>
             <if test="dpName!=null">
                AND DP_NAME=#{dpName}
@@ -50,6 +50,7 @@
         LEFT OUTER JOIN T_ATTENDANCE ON AT_EIID =EI_ID
         LEFT OUTER JOIN T_TRMID ON MID_EIID = EI_ID
         LEFT OUTER JOIN T_TRAINING ON MID_TRID = TR_ID
+
     </select>
 
     <resultMap id="department" type="com.example.ssm_springbootx.model.Department" extends="non-orm.DEPARTMENT">

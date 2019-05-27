@@ -5,6 +5,7 @@ import com.example.ssm_springbootx.model.Recruitment;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,7 +20,7 @@ public class RecruitmentService {
     }
 
     public List<Recruitment> getRecruitments(Recruitment recruitment){
-
+        if (recruitment==null)return new ArrayList<>();
         return recruitmentDao.getRecruitments(recruitment);
     }
 

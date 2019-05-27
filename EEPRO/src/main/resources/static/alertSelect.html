@@ -5,31 +5,150 @@
     <title>Title</title>
     <script src="js/jquery-3.1.0.js"></script>
     <script>
-        function al() {
+        // function al() {
+        //
+        //     alert($("#num").val())
+        //
+        //
+        //
+        // }
+        // $(function () {
+        //     alert($("#labc").text());
+        //
+        //     var abc = $("#toshow").data("to");
+        //     alert($("#"+abc).val())
+        // })
 
-            alert($("#num").val())
+        // function xyz(){
+        //     var input = $("#ori").find("input");
+        //     alert("find")
+        //     $("#tar").append(input)
+        //     alert("append")
+        //     input.val("xyz")
+        //     alert("val")
+        //
+        //     $("#ori").append($(":checkbox:checked").val())
+        // }
+        //
+        // function exop(){
+        //     $("#op").prop("selected",true);
+        // }
+        // $(function () {
+        //     var x=null;
+        //     alert(x==null)
+        //     alert(x=="0")
+           //  var json ={"a":"b","c":"d","x":{"asdf":"asdf","xx":{"asd":"asd","a":"a"}}};
+           // for (var i in json) {
+           //     alert(json[i])
+           // }
+            // alert($(".ab")[1].value);
+            // alert($($(".ab")[0]).val());
+            //
+            // alert($("input[data-to='data-to']").val())
 
 
+            // alert("option")
+            // $("option").each(function (i) {
+            //     alert("i"+i);
+            //
+            //     alert($(this).val()+"this")
+            // })
+            // alert($(":checkbox").parents("label").length)
+            // var d = new Date();
+            // alert(d.getFullYear())
+            // alert(d.getFullYear()+1)
 
+            // $("#kkk").change(function () {
+            //     alert($(this).val())
+            // })
+        // })
+    </script>
+    <script>
+        <!--长度-->
+        // alert("0123456789".substr(0,5))
+        // alert("0123456789".substr(1,5))
+        //
+        // //下标
+        // alert("0123456789".substring(0,5))
+        // alert("0123456789".substring(1,5))
+        function altime(){
+            var time = $("#time");
+            alert(time.val());
+            time.val("2019-01-01T02:02:02");
+            alert(time.val());
         }
         $(function () {
-            alert($("#labc").text());
-
-            var abc = $("#toshow").data("to");
-            alert($("#"+abc).val())
+            // alert($("option")[0].text)
+            // alert($("option")[0].innerText)
         })
     </script>
 </head>
 <body>
 
+<input id="time" type="datetime-local">
+<button onclick="altime()">time</button>
+<table border="1">
+    <tr>
+        <th>t1</th>
+        <th>t1</th>
+        <th>t1</th>
+    </tr>
+    <tr>
+        <td>test1</td>
+        <td>test2</td>
+        <td>test3</td>
+    </tr>
+    <tr>
+        <th>t2</th>
+        <th>t2</th>
+        <th>t2</th>
+        <th>t2</th>
+        <th>t2</th>
+    </tr>
+    <tr>
+        <td>t22</td>
+        <td>t22</td>
+        <td>t22</td>
+        <td>t22</td>
+        <td>t22</td>
+    </tr>
+</table>
+<button onclick="exop()">exop</button>
+<select id="kkk">
+    <option value="a">a</option>
+    <option id="op" value="b">b</option>
+    <option value="c">c</option>
+</select>
+<input type="date">
+<label><input value="1" type="checkbox" checked></label>
+<label><input value="2" type="checkbox"></label>
+<label><input value="3" type="checkbox" checked></label>
+<label><input value="4" type="checkbox"></label>
+
+<input data-to="data-to" value="datashow">
+<button onclick="xyz()">点击</button>
+<div id="ori">
+    ori<input disabled value="ori">
+</div>
+<div id="tar" >
+    tr1<input value="tar">
+    <br>
+    tr2<input>
+</div>
+<input class="ab" value="1">
+<input class="ab" value="2">
+<input class="ab" value="3">
+<input class="ab" value="4">
+
+
 <input id="toshow" data-to="show">
 <input id="show" value="success">
 
 
-<select id="num" name="num">
-    <option value="123">123</option>
-    <option value="456">456</option>
-</select>
+<!--<select id="num" name="num">-->
+    <!--<option value="123">123</option>-->
+    <!--<option value="456">456</option>-->
+<!--</select>-->
 
 <button onclick="al()">alert</button>
 

@@ -8,7 +8,7 @@ public class Basic implements Serializable {
     private int bsId;
 
     private int bsEEId;//员工账号
-    private int bsRsId;//引用简历
+    private int bsRsId;//简历引用
 
     private String bsName;
     private String bsGender;

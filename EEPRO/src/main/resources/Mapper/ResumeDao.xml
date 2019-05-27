@@ -14,8 +14,15 @@
 
     <update id="updateResume">
         update T_RESUME
-        set RS_EDUCATION=#{rsEducation}, RS_MAJOR=#{rsMajor}, RS_EXPERIENCE=#{rsExperience},
-         RS_SKILLS=#{rsSkills}, RS_AWARD=#{rsAward}, RS_INTRODUCTION=#{rsIntroduction}
+        <set>
+            <if test="rsEducation!=null">RS_EDUCATION=#{rsEducation},</if>
+            <if test="rsMajor!=null">RS_MAJOR=#{rsMajor},</if>
+            <if test="rsExperience!=null"> RS_EXPERIENCE=#{rsExperience},</if>
+            <if test="rsSkills!=null"> RS_SKILLS=#{rsSkills}, </if>
+            <if test="rsAward!=null"> RS_AWARD=#{rsAward}, </if>
+            <if test="rsIntroduction!=null">RS_INTRODUCTION=#{rsIntroduction} </if>
+        </set>
+
         where RS_ID=#{rsId}
     </update>
 

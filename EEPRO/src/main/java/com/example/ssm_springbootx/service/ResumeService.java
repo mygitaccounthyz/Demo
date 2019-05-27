@@ -21,13 +21,19 @@ public class ResumeService {
     }
 
 
-    public boolean addResume(Resume resume) {
-
+    public boolean addOrUpdateResume(Resume resume) {
+        if (resume==null)return false;
         Basic rsBasic = resume.getRsBasic();
-        boolean rs = resumeDao.addResume(resume);
-        rsBasic.setBsRsId(resume.getRsId());
-        boolean bs = basicDao.addBasic(rsBasic);
-
+        boolean rs;
+        boolean bs;
+        if (resume.getRsId()==0){
+            rs= resumeDao.addResume(resume);
+            rsBasic.setBsRsId(resume.getRsId());
+            bs= basicDao.addBasic(rsBasic);
+        }else {
+            rs=resumeDao.updateResume(resume);
+            bs=basicDao.updateBasic(rsBasic);
+        }
         return rs&&bs;
     }
 }

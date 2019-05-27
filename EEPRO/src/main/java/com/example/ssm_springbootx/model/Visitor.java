@@ -84,20 +84,21 @@ public class Visitor implements User , Serializable {
         this.viPass = viPass;
     }
 
-    @Override
-    public int getId() {
-        return viId;
-    }
-    @Override
-    public String getName() {
-        return viName;
-    }
-    @Override
-    public String getPass() {
-        return viPass;
-    }
+//    @Override
+//    public int getId() {
+//        return viId;
+//    }
+//    @Override
+//    public String getName() {
+//        return viName;
+//    }
+//    @Override
+//    public String getPass() {
+//        return viPass;
+//    }
+//
+//    @Override
 
-    @Override
     public boolean haveResume() {
        return this.getViResume()!=null;
     }

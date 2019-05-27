@@ -4,6 +4,7 @@ import com.example.ssm_springbootx.dao.EEIdDao;
 import com.example.ssm_springbootx.model.*;
 import com.example.ssm_springbootx.service.ApplicationService;
 
+import com.example.ssm_springbootx.service.EEInformationService;
 import com.example.ssm_springbootx.service.EmployeeService;
 import com.example.ssm_springbootx.service.VisitorService;
 import org.springframework.stereotype.Controller;
@@ -27,35 +28,34 @@ public class ApplicationController {
     private EmployeeService employeeService;
     @Resource
     private VisitorService visitorService;
+    @Resource
+    private EEInformationService eeInformationService;
 
-
+//投简历
     @RequestMapping("application.do")
-    public String application(int rcId,int viId){
-        Application application = new Application(new Recruitment(rcId),new Visitor(viId));
+    public void application(int rcId,int viId,HttpServletResponse response)
+            throws IOException {
+        Application application =
+                new Application(new Recruitment(rcId),new Visitor(viId));
         if (applicationService.addApplication(application)){
-            return "visitor";
+            response.getWriter().write("1");
         }
-        return "recruitment";
+        response.getWriter().write("0");
     }
+
 
     @RequestMapping("interview.do")
     public void interview(){
 
     }
 
+//    接受面试
     @RequestMapping("goInterview.do")
     public void goInterview(int apId,HttpSession session, HttpServletResponse response)
             throws IOException {
         Visitor visitor = (Visitor) session.getAttribute("user");
         List<Application> viApplications = visitor.getViApplications();
-        Application application = null;
-        for (Application viApplication : viApplications) {
-            if (viApplication.getApId()==apId)
-            {
-                application=viApplication;
-                break;
-            }
-        }
+        Application application = searchApp(apId,viApplications);
         if (application==null)return;
         application.setApState("接受面试");
         if (applicationService.updateApplication(application)){
@@ -73,47 +73,45 @@ public class ApplicationController {
         response.getWriter().write("0");
     }
 
+//    接受工作
     @RequestMapping("goWork.do")
-    public void goWork(int apId,HttpSession session, HttpServletResponse response) throws IOException {
+    public void goWork(int apId,HttpSession session, HttpServletResponse response)
+            throws IOException {
+
         Visitor visitor = (Visitor) session.getAttribute("user");
         List<Application> viApplications = visitor.getViApplications();
-        Application application = null;
-        for (Application viApplication : viApplications) {
-            if (viApplication.getApId()==apId)
-            {
-                application=viApplication;
-                break;
-            }
-        }
+        Application application = searchApp(apId,viApplications);
         if (application==null)return;
+
         application.setApState("接受工作");
         if (applicationService.updateApplication(application)){
+//            数据库序列生成新员工用户名序号
             int eeId = eeIdDao.getEEId();
             Employee employee =new Employee("employee"+eeId,"employee"+eeId,
                     visitor.getViResume().getRsBasic(),application.getApRcId().getRcJId(), visitor.getViId());
+
             if (employeeService.addEmployee(employee)){
-                Visitor newVisitor = visitorService.getVisitor(visitor);
-                session.setAttribute("user",newVisitor);
+
+                EEInformation eeInformation = new EEInformation();
+                eeInformation.setEiEeId(employee.getEeId());
+                eeInformationService.createOrUpdate(eeInformation);
+                visitor.setViEmployee(employee);
+
                 response.getWriter().write("1");
                 return;
             }
-//            basic-new user
         } response.getWriter().write("0");
     }
 
+//    终结申请
     @RequestMapping("endApp.do")
-    public void endApp(int apId,HttpSession session, HttpServletResponse response) throws IOException {
+    public void endApp(int apId,HttpSession session, HttpServletResponse response)
+            throws IOException {
         Visitor visitor = (Visitor) session.getAttribute("user");
         List<Application> viApplications = visitor.getViApplications();
-        Application application = null;
-        for (Application viApplication : viApplications) {
-            if (viApplication.getApId()==apId)
-            {
-                application=viApplication;
-                break;
-            }
-        }
+        Application application = searchApp(apId,viApplications);
         if (application==null)return;
+
         application.setApState("拒绝");
         if (applicationService.updateApplication(application)){
             response.getWriter().write("1");
@@ -128,7 +126,36 @@ public class ApplicationController {
             applicationService.updateApplication(app);
         }
         request.setAttribute("app",app);
-        return "showApplication";
+        return "/WEB-INF/bin/showApplication.jsp";
     }
 
+//    被拒绝后删除
+    @RequestMapping("delApp.do")
+    public void delApp(int apId,HttpServletResponse response,HttpSession session) throws IOException {
+        Visitor visitor = (Visitor) session.getAttribute("user");
+        List<Application> viApplications = visitor.getViApplications();
+        Application application = searchApp(apId, viApplications);
+        if (applicationService.deleteApplication(application)){
+
+            response.getWriter().write("1");
+        }else {
+            response.getWriter().write("0");
+        }
+
+
+    }
+
+//    重复代码
+    private Application searchApp(int apId,List<Application> applications){
+        if (applications==null||apId==0)return null;
+        Application application=null;
+        for (Application viApplication : applications) {
+            if (viApplication.getApId()==apId)
+            {
+                application=viApplication;
+                break;
+            }
+        }
+        return application;
+    }
 }

@@ -1,9 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.ssm_springbootx.dao.AttendanceDao">
-    <insert id="addAttendance"></insert>
-    <update id="updateAttendance"></update>
-    <delete id="deleteAttendance"></delete>
-    <select id="getAttendance" resultType="com.example.ssm_springbootx.model.Attendance"></select>
-    <select id="getAttendances" resultType="com.example.ssm_springbootx.model.Attendance"></select>
+
+    <insert id="addAttendance">
+        insert into T_ATTENDANCE (AT_ID, AT_ON, AT_EIID, AT_DLID)
+        values (SEQ_AT.nextval,#{atOn},#{atEiId},#{atDlId})
+    </insert>
+
+    <update id="updateAttendance">
+        update T_ATTENDANCE
+        <set>
+            <if test="atOff!=null">
+                AT_OFF=#{atOff},
+            </if>
+--             删除deal-dlId改为-1
+            <if test="atDlId!=0">
+                AT_DLID=#{atDlId}
+            </if>
+        </set>
+        where AT_ID=#{atId}
+    </update>
+
+    <delete id="deleteAttendance">
+        delete from T_ATTENDANCE where AT_ID=#{atId}
+    </delete>
+
+    <select id="getAttendance" resultMap="non-orm.ATTENDANCE">
+        select * from T_ATTENDANCE
+         <where>
+             <if test="atId!=0">AND AT_ID=#{atId}</if>
+--              <if test="atEiId!=0">AND AT_EIID=#{atEiId}</if>
+--              <if test="atOn!=null">and AT_ON=#{atOn} </if>
+--              <if test="atOff!=null">and AT_OFF=#{atOff} </if>
+         </where>
+
+    </select>
+
+    <select id="getAttendances" resultMap="non-orm.ATTENDANCE">
+        select * from T_ATTENDANCE
+        <where>
+            <if test="atOn!=null">AND AT_ON &lt; #{atOn}+1 and AT_ON > add_month(#{atOn},-1)</if>
+            <if test="atEiId!=0">AND AT_EIID = #{atEiId}</if>
+        </where>
+    </select>
+
+
 </mapper>

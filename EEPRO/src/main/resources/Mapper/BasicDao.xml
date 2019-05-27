@@ -12,11 +12,13 @@
     <update id="updateBasic">
         update T_BASIC
         <set>
-            BS_NAME=#{bsName},BS_PHONE=#{bsPhone},BS_ADDRESS=#{bsAddress},
-            BS_GENDER=#{bsGender}, BS_BIRTH=#{bsBirth}, BS_EMAIL=#{bsEmail}
-            <if test="bsEEId!=0">
-                BS_EEID=#{bsEEId}
-            </if>
+            <if test="bsName!=null"> BS_NAME=#{bsName},</if>
+            <if test="bsPhone!=null">BS_PHONE=#{bsPhone},</if>
+            <if test="bsAddress!=null">BS_ADDRESS=#{bsAddress},</if>
+            <if test="bsGender!=null">BS_GENDER=#{bsGender},</if>
+            <if test="bsBirth!=null">BS_BIRTH=#{bsBirth},</if>
+            <if test="bsEmail!=null">BS_EMAIL=#{bsEmail},</if>
+            <if test="bsEEId!=0">BS_EEID=#{bsEEId}</if>
         </set>
          where BS_ID=#{bsId}
     </update>

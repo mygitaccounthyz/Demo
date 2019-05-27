@@ -3,7 +3,7 @@
 <mapper namespace="com.example.ssm_springbootx.dao.EmployeeDao">
 
     <insert id="addEmployee">
-        <selectKey keyProperty="eeJId" order="BEFORE" resultType="int">
+        <selectKey keyProperty="eeId" order="BEFORE" resultType="int">
             select SEQ_EE.nextval from dual
         </selectKey>
         insert into T_EMPLOYEE (EE_ID, EE_JID, EE_VIID, EE_STATE, EE_NAME, EE_PASS)
@@ -32,22 +32,21 @@
 
     <select id="getEmployee" resultMap="employee">
         select * from T_EMPLOYEE
-
         LEFT OUTER JOIN T_JOB ON EE_JID=J_ID
         left outer join T_DEPARTMENT on J_DPID=DP_ID
-
         LEFT OUTER JOIN T_BASIC ON EE_ID=BS_EEID
-
         LEFT OUTER JOIN T_EEINFORMATION ON EI_EEID=EE_ID
+
         LEFT OUTER JOIN T_SALARY ON SL_EIID = EI_ID
-        LEFT OUTER JOIN T_DEAL ON DL_EIID =EI_ID
-        LEFT OUTER JOIN T_ATTENDANCE ON AT_EIID =EI_ID
         LEFT OUTER JOIN T_TRMID ON MID_EIID = EI_ID
         LEFT OUTER JOIN T_TRAINING ON MID_TRID = TR_ID
 
+        LEFT OUTER JOIN T_ATTENDANCE ON AT_EIID =EI_ID and AT_ON>add_months(last_day(sysdate)+1,-2)
+        LEFT OUTER JOIN T_DEAL ON DL_EIID =EI_ID and DL_DATE>add_months(last_day(sysdate)+1,-2)
+
         <where>
             <if test="eeId!=0">
-               and EE_ID=#{eeId}
+                EE_ID=#{eeId}
             </if>
             <if test="eeName!=null">
                and EE_NAME=#{eeName}
@@ -55,6 +54,7 @@
             <if test="eePass!=null">
                and EE_PASS=#{eePass}
             </if>
+
         </where>
     </select>
 

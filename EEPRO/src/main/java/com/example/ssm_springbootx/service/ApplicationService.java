@@ -15,15 +15,19 @@ public class ApplicationService {
 
 
     public boolean addApplication(Application application) {
-
+        if (application==null||application.getApViId()==null||application.getApRcId()==null)
+            return false;
         return applicationDao.addApplication(application);
     }
 
     public boolean deleteApplication(Application application){
+        if (application==null||application.getApId()==0)return false;
         return applicationDao.deleteApplication(application);
     }
 
+
     public boolean updateApplication(Application application){
+        if (application==null||application.getApId()==0)return false;
         return applicationDao.updateApplication(application);
     }
 

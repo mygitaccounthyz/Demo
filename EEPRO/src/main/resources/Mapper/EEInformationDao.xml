@@ -3,12 +3,16 @@
 <mapper namespace="com.example.ssm_springbootx.dao.EEInformationDao">
 
     <insert id="addEEInformation">
-        insert into T_EEINFORMATION (EI_ID, EI_EEID, EI_ACCOUNT, EI_IDCARD)
-        VALUES (SEQ_EI.nextval,#{eiEeId},#{eiAccount},#{eiIDCard})
+        insert into T_EEINFORMATION (EI_ID, EI_EEID)
+        VALUES (SEQ_EI.nextval,#{eiEeId})
     </insert>
 
     <update id="updateEEInformation">
-        UPDATE T_EEINFORMATION SET EI_ACCOUNT=#{eiAccount},EI_IDCARD=#{eiIDCard}
+        UPDATE T_EEINFORMATION
+        <set>
+            <if test="eiAccount!=null">EI_ACCOUNT=#{eiAccount},</if>
+            <if test="eiIDCard!=null">EI_IDCARD=#{eiIDCard}</if>
+        </set>
         WHERE EI_ID=#{eiId}
     </update>
 

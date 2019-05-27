@@ -11,6 +11,6 @@ public class Transfer {
         if (target!=null)
         return target;
 
-        return "index";
+        return "/WEB-INF/bin/index.jsp";
     }
 }

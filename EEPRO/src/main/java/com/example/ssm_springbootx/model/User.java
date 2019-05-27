@@ -2,8 +2,8 @@ package com.example.ssm_springbootx.model;
 
 public interface User {
 
-    int getId();
-    String getName();
-    String getPass();
-    boolean haveResume();
+//    int getId();
+//    String getName();
+//    String getPass();
+//    boolean haveResume();
 }

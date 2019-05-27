@@ -7,7 +7,7 @@ public class Employee implements User, Serializable {
     private int eeId;
     private String eeName;
     private String eePass;
-    private String eeState;//在职、离职
+    private String eeState;//实习、在职、离职
 //fk
     private int eeViId;
     private Job eeJId;//双向int->Job
@@ -17,6 +17,7 @@ public class Employee implements User, Serializable {
 
 
     public Employee() {
+
     }
 
     public Employee(int eeId) {
@@ -30,7 +31,7 @@ public class Employee implements User, Serializable {
         this.eeBsId = eeBsId;
         this.eeJId = eeJId;
         this.eeViId = eeViId;
-        this.eeState="在职";
+        this.eeState="实习";
     }
 
     public EEInformation getEeInformation() {
@@ -97,20 +98,21 @@ public class Employee implements User, Serializable {
         this.eeState = eeState;
     }
 
-    @Override
-    public int getId() {
-        return eeId;
-    }
-    @Override
-    public String getName() {
-        return eeName;
-    }
-    @Override
-    public String getPass() {
-        return eePass;
-    }
+//    @Override
+//    public int getId() {
+//        return eeId;
+//    }
+//    @Override
+//    public String getName() {
+//        return eeName;
+//    }
+//    @Override
+//    public String getPass() {
+//        return eePass;
+//    }
+//
+//    @Override
 
-    @Override
     public boolean haveResume() {
         return false;
     }

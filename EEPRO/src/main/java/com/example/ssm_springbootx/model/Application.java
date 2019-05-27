@@ -2,13 +2,13 @@ package com.example.ssm_springbootx.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.sql.Date;
 
 public class Application implements Serializable {
 
     private int apId;
 
-    private String apState;//未读、已读、面试、接受面试、录用、拒绝
+    private String apState;//未读、已读、面试、接受面试、录用、接受录用、拒绝
     private Date apDate;//投递时间
     private Timestamp apTime;//面试时间
 
@@ -26,7 +26,7 @@ public class Application implements Serializable {
     public Application(Recruitment apRcId, Visitor apViId) {
         this.apRcId = apRcId;
         this.apViId = apViId;
-        this.apDate = new Date();
+        this.apDate = new Date(new java.util.Date().getTime());
         this.apState="未读";
     }
 
@@ -63,7 +63,7 @@ public class Application implements Serializable {
         this.apViId = apViId;
     }
 
-    public Date getApTime() {
+    public Timestamp getApTime() {
         return apTime;
     }
 

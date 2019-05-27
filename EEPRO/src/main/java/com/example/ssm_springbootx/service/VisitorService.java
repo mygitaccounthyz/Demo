@@ -11,30 +11,30 @@ public class VisitorService {
     @Resource
     private VisitorDao visitorDao;
 
+//    id或者name+pass查找
     public Visitor getVisitor(Visitor visitor){
         if (visitor==null)return null;
-
-        if (visitor.getId()==0&&(visitor.getName()==null||visitor.getPass()==null))
+//        根据id和用户名、密码两种方式都无法查到返回null
+        if (visitor.getViId()==0&&(visitor.getViName()==null||visitor.getViPass()==null))
             return null;
-
         return visitorDao.getVisitor(visitor);
     }
 
     public boolean addVisitor(Visitor visitor){
-        if (visitor==null||visitor.getName()==null||visitor.getPass()==null)
+        if (visitor==null||visitor.getViName()==null||visitor.getViPass()==null)
             return false;
         return visitorDao.addVisitor(visitor);
     }
 
     public boolean deleteVisitor(Visitor visitor){
-        if (visitor==null||visitor.getId()==0)
+        if (visitor==null||visitor.getViId()==0)
             return false;
         return visitorDao.deleteVisitor(visitor);
     }
 
     public boolean updateVisitor(Visitor visitor){
-        if (visitor==null||visitor.getId()==0||
-                (visitor.getName()==null&&visitor.getPass()==null))return false;
+        if (visitor==null||visitor.getViId()==0||
+                (visitor.getViName()==null&&visitor.getViPass()==null))return false;
         return visitorDao.updateVisitor(visitor);
     }
 

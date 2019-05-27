@@ -36,7 +36,10 @@
         left outer join T_JOB on J_ID=EE_JID
         left outer join T_DEPARTMENT on DP_ID=J_DPID
 
-        where TR_ID=#{trId}
+        <where>
+            TR_ID=#{trId}
+
+        </where>
     </select>
 
     <select id="getTrainings" resultType="com.example.ssm_springbootx.model.Training">
@@ -50,11 +53,9 @@
         left outer join T_DEPARTMENT on DP_ID=J_DPID
 
         <where>
-            <if test="trTitle!=null">
-               and TR_TITLE=#{trTitle}
-            </if>
             <if test="trTime!=null">
-               and TR_TIME &lt; #{trTime}
+               and TR_TIME &lt; lastday(#{trTime})+1
+                and TR_TIME > add_months(lastday(#{trTime})+1,-1)
             </if>
         </where>
     </select>

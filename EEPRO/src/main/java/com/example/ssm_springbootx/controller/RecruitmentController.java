@@ -21,7 +21,7 @@ public class RecruitmentController {
     public String showRecruitment(int rcId, HttpServletRequest request){
         Recruitment recruitment = recruitmentService.getRecruitment(rcId);
         request.setAttribute("recruitment",recruitment);
-        return "recruitment";
+        return "/WEB-INF/bin/recruitment.jsp";
     }
 
 
@@ -31,7 +31,7 @@ public class RecruitmentController {
         recruitment.setRcState("已发布");
         List<Recruitment> recruitments = recruitmentService.getRecruitments(recruitment);
         session.setAttribute("recruitments",recruitments);
-        return "index";
+        return "/WEB-INF/bin/index.jsp";
     }
 
 }

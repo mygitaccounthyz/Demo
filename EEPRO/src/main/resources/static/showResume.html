@@ -3,8 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="js/jquery-3.1.0.js"></script>
+    <script>
+
+        function aljob() {
+            alert($("#job").is(':checked')+"job")
+        }
+        function findvalue(){
+            $("#find").attr("hidden",true);
+        }
+        function hidevalue(){
+            $("#find").attr("hidden",false);
+        }
+        $(function () {
+
+            alert($("#xxx").parent().text());
+            // alert($("select").data("to"))
+            // alert($("select").parent().find("button").val())
+            // alert($($("select").parent()).find("button").val())
+
+            $("#department0").click(function () {
+                if ($(this).prop("checked")) {
+                    $("#c5").prop("checked", true);
+                } else {
+                    $("#c5").prop("checked", false);
+                }
+            })
+        })
+
+
+    </script>
 </head>
 <body>
+
+<table>
+    <tr>
+        <td>aaa</td>
+        <td>aaa</td>
+        <td>aaa</td>
+    </tr>
+    <tr>
+        <div>
+            xyz
+        </div>
+    </tr>
+</table>
+
+<div>
+    show
+    <input value="xxx" id="xxx">
+</div>
+<div>
+    <button onclick="aljob()">job</button>
+    <div class="dpfloor">
+        1<input id="department0" type="checkbox" class="department">
+        <div class="jfloor">
+            2<input type="checkbox" id="job" class="job">
+            <br>
+            3<input type="checkbox" class="employee">
+            4<input type="checkbox" class="employee">
+            5<input type="checkbox" id="c5" class="employee">
+        </div>
+    </div>
+</div>
+
+<div>
+    <button onclick="findvalue()">hide</button>
+    <button onclick="hidevalue()">find</button>
+
+    <input value="value" id="find">
+    <button value="button" onclick="but(this)">button</button>
+    <select data-to="abc"></select>
+</div>
 <table border='1' style="border-collapse: collapse">
     <tr>
         <td colspan='4' align='center'>

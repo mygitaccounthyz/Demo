@@ -29,7 +29,17 @@
         LEFT OUTER JOIN T_RESUME ON RS_VIID=VI_ID
         LEFT OUTER JOIN T_BASIC ON BS_RSID=RS_ID
 
-        where RC_ID=#{rcId}
+        <where>
+            <if test="rcId!=0">
+                RC_ID=#{rcId}
+            </if>
+            <if test="rcJId!=null and rcJId.jId!=0">
+               and RC_JID=#{rcJId.jId}
+            </if>
+            <if test="rcState!=null">
+                AND RC_STATE=#{rcState}
+            </if>
+        </where>
     </select>
 
     <!--ADMIN-->
@@ -38,19 +48,11 @@
 
         left outer join T_JOB on RC_ID=J_RCID
         LEFT OUTER JOIN T_DEPARTMENT ON J_DPID=DP_ID
-
         LEFT OUTER JOIN T_APPLICATION ON AP_RCID=RC_ID
         LEFT OUTER JOIN T_VISITOR ON AP_VIID=VI_ID
         LEFT OUTER JOIN T_RESUME ON RS_VIID=VI_ID
         LEFT OUTER JOIN T_BASIC ON BS_RSID=RS_ID
-        <where>
-            <if test="rcJId!=null and rcJId.jId!=0">
-                RC_JID=#{rcJId.jId}
-            </if>
-            <if test="rcState!=null">
-               AND RC_STATE=#{rcState}
-            </if>
-        </where>
+
     </select>
 
     <resultMap id="RECRUITMENT" type="com.example.ssm_springbootx.model.Recruitment" extends="non-orm.RECRUITMENT">

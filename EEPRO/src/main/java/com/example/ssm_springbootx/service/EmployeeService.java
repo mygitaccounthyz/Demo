@@ -16,8 +16,11 @@ public class EmployeeService {
     @Resource
     private BasicDao basicDao;
 
-    public Employee getEmployee(Employee employee0) {
 
+    public Employee getEmployee(Employee employee0) {
+        if (employee0==null)return null;
+        if (employee0.getEeId()==0&&(employee0.getEeName()==null||employee0.getEePass()==null))
+            return null;
         return employeeDao.getEmployee(employee0);
     }
 
